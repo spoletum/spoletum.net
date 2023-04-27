@@ -25,7 +25,7 @@ provider "hcloud" {}
 
 resource "hcloud_ssh_key" "personal" {
   name       = "personal"
-  public_key = var.ssh_key
+  public_key = var.ssh_public_key
 }
 
 resource "hcloud_network" "petclinic" {
@@ -54,20 +54,20 @@ resource "hcloud_server" "petclinic" {
     network_id = hcloud_network.petclinic.id
   }
   ssh_keys = [hcloud_ssh_key.personal.name]
-  user_data = base64encode(templatefile("${path.module}/cloud-init.tpl", {
-    ansible_public_key = var.ansible_public_key,
-  }))
+  # user_data = base64encode(templatefile("${path.module}/cloud-init.tpl", {
+  #   ansible_public_key = var.ansible_public_key,
+  # }))
 }
 
-resource "local_file" "inventory" {
-  content = templatefile("${path.module}/inventory.tpl",
-    {
-      dev01         = hcloud_server.petclinic.ipv4_address
-      dev01_private = tolist(hcloud_server.petclinic.network)[0].ip
-    }
-  )
-  filename = "../ansible/inventory.ini"
-}
+# resource "local_file" "inventory" {
+#   content = templatefile("${path.module}/inventory.tpl",
+#     {
+#       dev01         = hcloud_server.petclinic.ipv4_address
+#       dev01_private = tolist(hcloud_server.petclinic.network)[0].ip
+#     }
+#   )
+#   filename = "../ansible/inventory.ini"
+# }
 
 resource "hcloud_rdns" "petclinic" {
   dns_ptr    = "spoletum.net"
