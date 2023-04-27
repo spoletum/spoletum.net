@@ -40,6 +40,9 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
 
+    - name: Terraform Init
+      run: terraform init
+
     - name: Download inventory file from Terraform Cloud
       run: |
         terraform output -raw ansible_inventory
