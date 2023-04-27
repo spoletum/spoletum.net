@@ -1,11 +1,13 @@
 terraform {
+
   required_providers {
     hcloud = {
       source = "hetznercloud/hcloud"
     }
   }
+  
   cloud {
-    organization = "spoletum-net"
+    organization = "spoletum"
     workspaces {
       name = "spoletum-net"
     }
