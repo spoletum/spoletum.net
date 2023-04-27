@@ -41,7 +41,8 @@ jobs:
         cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
 
     - name: Download inventory file from Terraform Cloud
-      run: terraform output -raw ansible_inventory > inventory.ini
+      run: |
+        terraform output -raw ansible_inventory
 
     - name: Install Ansible
       run: |
