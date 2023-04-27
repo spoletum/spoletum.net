@@ -67,19 +67,18 @@ resource "hcloud_server" "albornoz" {
   }))
 }
 
-# resource "local_file" "inventory" {
-#   content = templatefile("${path.module}/inventory.tpl",
-#     {
-#       dev01         = hcloud_server.albornoz.ipv4_address
-#       dev01_private = tolist(hcloud_server.albornoz.network)[0].ip
-#     }
-#   )
-#   filename = "../ansible/inventory.ini"
-# }
-
+resource "local_file" "inventory" {
+  content = templatefile("${path.module}/templates/inventory.tpl",
+    {
+      dev01         = hcloud_server.albornoz.ipv4_address
+      dev01_private = tolist(hcloud_server.albornoz.network)[0].ip
+    }
+  )
+  filename = "../ansible/inventory.ini"
+}
 
 resource "hcloud_rdns" "albornoz" {
-  dns_ptr    = "spoletum.net"
+  dns_ptr    = hetznerdns_zone.spoleto_net.id
   ip_address = hcloud_server.albornoz.ipv4_address
   server_id  = hcloud_server.albornoz.id
 }
