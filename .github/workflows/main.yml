@@ -24,7 +24,7 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        
+
       - name: Archive inventory.ini
         if: success()
         uses: actions/upload-artifact@v3

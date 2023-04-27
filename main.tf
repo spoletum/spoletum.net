@@ -74,5 +74,5 @@ resource "local_file" "inventory" {
       dev01_private = tolist(hcloud_server.albornoz.network)[0].ip
     }
   )
-  filename = "../ansible/inventory.ini"
+  filename = "inventory.ini"
 }
