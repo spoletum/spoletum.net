@@ -21,7 +21,9 @@ variable "ssh_public_key" {}
 variable "ansible_public_key" {}
 
 # Configure the Hetzner Cloud Provider
-provider "hcloud" {}
+provider "hcloud" {
+  token = var.hcloud_token
+}
 
 resource "hcloud_ssh_key" "personal" {
   name       = "personal"
