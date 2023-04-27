@@ -24,14 +24,7 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-
-      - name: Archive inventory.ini
-        if: success()
-        uses: actions/upload-artifact@v3
-        with:
-          name: inventory
-          path: inventory.ini
-
+  
   ansible:
 
     needs: terraform
@@ -42,11 +35,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Download inventory.ini
-      uses: actions/download-artifact@v3
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
       with:
-        name: inventory
-        path: .
+        cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
+
+    - name: Download inventory file from Terraform Cloud
+      run: terraform output --remote output.ansible_inventory
 
     - name: Install Ansible
       run: |

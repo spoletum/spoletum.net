@@ -67,12 +67,15 @@ resource "hcloud_server" "albornoz" {
   }))
 }
 
-resource "local_file" "inventory" {
-  content = templatefile("${path.module}/templates/inventory.tpl",
+locals {
+ ansible_inventory = templatefile("${path.module}/templates/inventory.tpl",
     {
       dev01         = hcloud_server.albornoz.ipv4_address
       dev01_private = tolist(hcloud_server.albornoz.network)[0].ip
     }
   )
-  filename = "inventory.ini"
+}
+
+output "ansible_inventory" {
+  value = local.ansible_inventory
 }
