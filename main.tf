@@ -78,7 +78,7 @@ resource "local_file" "inventory" {
 }
 
 resource "hcloud_rdns" "albornoz" {
-  dns_ptr    = hetznerdns_zone.spoleto_net.id
+  dns_ptr    = "spoletum.net"
   ip_address = hcloud_server.albornoz.ipv4_address
   server_id  = hcloud_server.albornoz.id
 }
