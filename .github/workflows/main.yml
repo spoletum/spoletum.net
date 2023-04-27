@@ -45,7 +45,7 @@ jobs:
 
     - name: Download inventory file from Terraform Cloud
       run: |
-        terraform output -raw ansible_inventory > ansible/inventory.ini && echo ansible/inventory.ini
+        terraform output -raw ansible_inventory > ansible/inventory.ini && cat ansible/inventory.ini
 
     - name: Install Ansible
       run: |
