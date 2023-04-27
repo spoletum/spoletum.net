@@ -4,6 +4,9 @@ terraform {
     hcloud = {
       source = "hetznercloud/hcloud"
     }
+    hetznerdns = {
+      source = "timohirt/hetznerdns"
+    }
   }
 
   cloud {
@@ -17,6 +20,10 @@ terraform {
 # Configure the Hetzner Cloud Provider
 provider "hcloud" {
   token = var.HCLOUD_TOKEN
+}
+
+provider "hetznerdns" {
+  apitoken = var.HDNS_TOKEN
 }
 
 resource "hcloud_ssh_key" "personal" {
@@ -53,4 +60,16 @@ resource "hcloud_server" "albornoz" {
   user_data = base64encode(templatefile("${path.module}/templates/cloud-init.tpl", {
     ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
   }))
+}
+
+resource "hetznerdns_zone" "spoletum_net" {
+  name = "spoletum.net"
+  ttl  = 60
+}
+
+resource "hetznerdns_record" "example_com_root" {
+  zone_id = hetznerdns_zone.spoletum_net.id
+  name    = "albornoz"
+  value   = hcloud_server.albornoz.ipv4_address
+  type    = "A"
 }

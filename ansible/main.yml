@@ -1,6 +1,6 @@
 - name: Configure the Consul cluster
-  hosts: all_in_one
+  hosts: public
   vars_files:
     - ./variables.yml
   roles:
-    - letsencrypt   
+    - letsencrypt

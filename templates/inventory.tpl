@@ -1,2 +1,2 @@
-[all_in_one]
-albornoz ansible_host=${ albornoz }
+[public]
+albornoz.spoletum.net ansible_host=${ albornoz }

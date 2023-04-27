@@ -53,15 +53,7 @@ jobs:
         sudo apt-get install -y ansible
 
     - name: Wait for servers
-      run: |
-        IP_ADDRESSES=$(cat ansible/inventory.ini | grep ansible_host | awk -F "=" '{print $2}')
-        for ip in $IP_ADDRESSES; do
-          echo "Waiting for server $ip to become available..."
-          while ! ping -c1 $ip &>/dev/null; do
-            sleep 5
-          done
-          echo "Server $ip is available."
-        done
+      run: sleep 6
 
     - name: Run Ansible Playbook
       run: cd ansible && ansible-playbook -i inventory.ini main.yml

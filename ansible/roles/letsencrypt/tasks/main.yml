@@ -1,0 +1,44 @@
+- name: Install Snapd
+  dnf:
+    name: snapd
+    state: present
+  become: true
+
+- name: Initialize Snapd
+  command: sudo systemctl enable --now snapd.socket
+  become: true
+
+- name: Check if snapd is ready
+  systemd:
+    name: snapd.service
+    state: started
+    enabled: yes
+  register: snapd_status
+  until: snapd_status is succeeded
+  retries: 10
+  delay: 5  
+
+- name: Create the /snap symlink
+  file:
+    src: /var/lib/snapd/snap
+    dest: /snap
+    state: link
+  become: true
+
+- name: Install Certbot
+  command: sudo snap install --classic certbot
+  become: true
+
+- name: Start standalone web server on custom port
+  command: sudo certbot certonly --standalone --preferred-challenges http -d {{ inventory_hostname }} --agree-tos --no-eff-email --non-interactive --email {{ letsencrypt_email }}
+
+- name: Set permissions on Certbot files
+  file:
+    path: "/etc/letsencrypt/{{ item }}"
+    mode: "u=rwX,g=rX,o=rX"
+    recurse: yes
+  with_items:
+    - live
+    - archive
+  register: file_result
+  become: true
