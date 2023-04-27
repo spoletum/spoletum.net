@@ -77,6 +77,7 @@ resource "hcloud_server" "albornoz" {
 #   filename = "../ansible/inventory.ini"
 # }
 
+
 resource "hcloud_rdns" "albornoz" {
   dns_ptr    = "spoletum.net"
   ip_address = hcloud_server.albornoz.ipv4_address
