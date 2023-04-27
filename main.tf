@@ -54,12 +54,3 @@ resource "hcloud_server" "albornoz" {
     ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
   }))
 }
-
-locals {
- ansible_inventory = templatefile("${path.module}/templates/inventory.tpl",
-    {
-      dev01         = hcloud_server.albornoz.ipv4_address
-      dev01_private = tolist(hcloud_server.albornoz.network)[0].ip
-    }
-  )
-}

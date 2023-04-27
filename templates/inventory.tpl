@@ -1,2 +1,2 @@
 [all_in_one]
-${ dev01 }
+albornoz ansible_host=${ albornoz }
