@@ -14,18 +14,6 @@ terraform {
   }
 }
 
-variable "HCLOUD_TOKEN" {
-  sensitive = true
-}
-
-variable "SSH_PUBLIC_KEY" {
-  sensitive = true
-}
-
-variable "ANSIBLE_PUBLIC_KEY" {
-  sensitive = true
-}
-
 # Configure the Hetzner Cloud Provider
 provider "hcloud" {
   token = var.HCLOUD_TOKEN
@@ -74,8 +62,4 @@ locals {
       dev01_private = tolist(hcloud_server.albornoz.network)[0].ip
     }
   )
-}
-
-output "ansible_inventory" {
-  value = local.ansible_inventory
 }
