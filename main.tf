@@ -18,9 +18,13 @@ variable "hcloud_token" {
   sensitive = true
 }
 
-variable "ssh_public_key" {}
+variable "ssh_public_key" {
+  sensitive = true
+}
 
-variable "ansible_public_key" {}
+variable "ansible_public_key" {
+  sensitive = true
+}
 
 # Configure the Hetzner Cloud Provider
 provider "hcloud" {
