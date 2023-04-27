@@ -45,7 +45,7 @@ jobs:
 
     - name: Download inventory file from Terraform Cloud
       run: |
-        terraform output -raw ansible_inventory > ansible/inventory.ini
+        terraform output -raw ansible_inventory > ansible/inventory.ini && echo ansible/inventory.ini
 
     - name: Install Ansible
       run: |
@@ -54,7 +54,7 @@ jobs:
 
     - name: Wait for servers
       run: |
-        IP_ADDRESSES=$(cat inventory.ini | grep ansible_host | awk -F "=" '{print $2}')
+        IP_ADDRESSES=$(cat ansible/inventory.ini | grep ansible_host | awk -F "=" '{print $2}')
         for ip in $IP_ADDRESSES; do
           echo "Waiting for server $ip to become available..."
           while ! ping -c1 $ip &>/dev/null; do
