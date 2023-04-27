@@ -14,26 +14,26 @@ terraform {
   }
 }
 
-variable "hcloud_token" {
+variable "HCLOUD_TOKEN" {
   sensitive = true
 }
 
-variable "ssh_public_key" {
+variable "SSH_PUBLIC_KEY" {
   sensitive = true
 }
 
-variable "ansible_public_key" {
+variable "ANSIBLE_PUBLIC_KEY" {
   sensitive = true
 }
 
 # Configure the Hetzner Cloud Provider
 provider "hcloud" {
-  token = var.hcloud_token
+  token = var.HCLOUD_TOKEN
 }
 
 resource "hcloud_ssh_key" "personal" {
   name       = "personal"
-  public_key = var.ssh_public_key
+  public_key = var.SSH_PUBLIC_KEY
 }
 
 resource "hcloud_network" "albornoz" {
@@ -63,7 +63,7 @@ resource "hcloud_server" "albornoz" {
   }
   ssh_keys = [hcloud_ssh_key.personal.name]
   user_data = base64encode(templatefile("${path.module}/templates/cloud-init.tpl", {
-    ansible_public_key = var.ansible_public_key,
+    ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
   }))
 }
 
