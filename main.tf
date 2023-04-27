@@ -5,7 +5,10 @@ terraform {
     }
   }
   cloud {
-    organization = "spoletum"
+    organization = "spoletum-net"
+    workspaces {
+      name = "spoletum-net"
+    }
   }
 }
 
@@ -13,7 +16,7 @@ variable "hcloud_token" {
   sensitive = true
 }
 
-variable "ssh_key" {}
+variable "ssh_public_key" {}
 
 variable "ansible_public_key" {}
 
