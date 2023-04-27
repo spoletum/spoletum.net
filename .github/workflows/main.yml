@@ -5,16 +5,64 @@ jobs:
   terraform:
 
     runs-on: ubuntu-latest
+
     steps:
+
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
+
       - name: Terraform Init
         run: terraform init
+
       - name: Terraform Plan
         run: terraform plan
+
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        
+      - name: Archive inventory.ini
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: inventory
+          path: inventory.ini
+
+  ansible:
+
+    needs: terraform
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Download inventory.ini
+      uses: actions/download-artifact@v3
+      with:
+        name: inventory
+        path: .
+
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ansible
+
+    - name: Wait for servers
+      run: |
+        IP_ADDRESSES=$(cat inventory.ini | grep ansible_host | awk -F "=" '{print $2}')
+        for ip in $IP_ADDRESSES; do
+          echo "Waiting for server $ip to become available..."
+          while ! ping -c1 $ip &>/dev/null; do
+            sleep 5
+          done
+          echo "Server $ip is available."
+        done
+
+    - name: Run Ansible Playbook
+      run: ansible-playbook -i inventory.ini your_playbook.yml
