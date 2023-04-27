@@ -45,7 +45,7 @@ jobs:
 
     - name: Download inventory file from Terraform Cloud
       run: |
-        terraform output -raw ansible_inventory
+        terraform output -raw ansible_inventory > ansible/inventory.ini
 
     - name: Install Ansible
       run: |
@@ -64,4 +64,4 @@ jobs:
         done
 
     - name: Run Ansible Playbook
-      run: ansible-playbook -i inventory.ini your_playbook.yml
+      run: cd ansible && ansible-playbook -i inventory.ini main.yml
