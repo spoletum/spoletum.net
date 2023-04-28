@@ -61,6 +61,6 @@ jobs:
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
 
     - name: Run Ansible Playbook
-      run: cd ansible && ansible-playbook -vvv -u ansible -i inventory.ini main.yml
+      run: cd ansible && cat /home/runner/work/spoletum.net/spoletum.net/ansible/inventory.ini && ansible-playbook -vvv -u ansible -i inventory.ini main.yml
       env:
         DEFAULT_REMOTE_USER: ${{ secrets.ANSIBLE_USER }}
