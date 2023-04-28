@@ -59,8 +59,6 @@ jobs:
       run: |
         eval "$(ssh-agent -s)"
         echo "${{ secrets.SSH_PRIVATE_KEY_CONTENT }}" | ssh-add -
-      env:
-        SSH_PRIVATE_KEY_CONTENT: ${{ secrets.SSH_PRIVATE_KEY_CONTENT }}
 
     - name: Run Ansible Playbook
       run: cd ansible && ansible-playbook -i inventory.ini main.yml
