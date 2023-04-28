@@ -60,7 +60,10 @@ jobs:
         eval "$(ssh-agent -s)"
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
 
+    - name: Display the inventory file that we are going to use
+      run: cat /home/runner/work/spoletum.net/spoletum.net/ansible/inventory.ini 
+
     - name: Run Ansible Playbook
-      run: cd ansible && cat /home/runner/work/spoletum.net/spoletum.net/ansible/inventory.ini && ansible-playbook -vvv -u ansible -i inventory.ini main.yml
+      run: cd ansible && ansible-playbook -vvv -u ansible -i inventory.ini main.yml
       env:
         DEFAULT_REMOTE_USER: ${{ secrets.ANSIBLE_USER }}
