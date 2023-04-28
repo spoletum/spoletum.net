@@ -65,4 +65,4 @@ jobs:
     - name: Run Ansible Playbook
       run: cd ansible && ansible-playbook -i inventory.ini main.yml
       env:
-        DEFAULT_REMOTE_USER: ${{ secret.ANSIBLE_USER }}
+        DEFAULT_REMOTE_USER: ${{ secrets.ANSIBLE_USER }}
