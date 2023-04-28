@@ -1,3 +1,5 @@
-public:
-  hosts:
-    albornoz.spoletum.net:
+all:
+  children:
+    public:
+      hosts:
+        albornoz.spoletum.net:
