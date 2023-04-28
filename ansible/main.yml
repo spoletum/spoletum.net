@@ -1,6 +1,7 @@
-- name: Configure the Consul cluster
+- name: Install TLS certificate
   hosts: public
-  vars_files:
-    - ./variables.yml
+  vars:
+    letsencrypt_account_key_path: "{{ lookup('env', 'LE_ACCOUNT_KEY') }}"
+    letsencrypt_account_email: "{{ lookup('env', 'LE_ACCOUNT_EMAIL') }}"
   roles:
     - letsencrypt

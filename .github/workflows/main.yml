@@ -52,8 +52,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y ansible
 
-    - name: Wait for servers
-      run: sleep 6
+    - name: Install Ansible plug-ins
+      run: ansible-galaxy collection install community.crypto
+
+    - name: Start SSH agent and load private key
+      run: |
+        eval "$(ssh-agent -s)"
+        echo "${{ secrets.SSH_PRIVATE_KEY_CONTENT }}" | ssh-add -
+      env:
+        SSH_PRIVATE_KEY_CONTENT: ${{ secrets.SSH_PRIVATE_KEY_CONTENT }}
 
     - name: Run Ansible Playbook
       run: cd ansible && ansible-playbook -i inventory.ini main.yml
+      env:
+        DEFAULT_REMOTE_USER: ${{ secret.ANSIBLE_USER }}
