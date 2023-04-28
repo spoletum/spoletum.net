@@ -49,6 +49,7 @@ jobs:
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
 
     - name: Run Ansible Playbook
-      run: cd ansible && ansible-playbook -vvv -u ansible -i inventory.yml playbook.yml
+      run: ansible-playbook -vvv -u ansible -i inventory.yml playbook.yml
+      working-directory: ansible
       env:
         DEFAULT_REMOTE_USER: ${{ secrets.ANSIBLE_USER }}
