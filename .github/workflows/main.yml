@@ -58,7 +58,7 @@ jobs:
     - name: Start SSH agent and load private key
       run: |
         eval "$(ssh-agent -s)"
-        echo "${{ secrets.SSH_PRIVATE_KEY_CONTENT }}" | ssh-add -
+        echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
 
     - name: Run Ansible Playbook
       run: cd ansible && ansible-playbook -i inventory.ini main.yml
