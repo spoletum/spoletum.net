@@ -52,12 +52,6 @@ jobs:
         eval "$(ssh-agent -s)"
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
 
-    - name: "[DEBUG] Show properties of the inventory file"
-      run: |
-        pwd
-        ls -la .
-        cat inventory.yml
-
     - name: Run Ansible Playbook
       run: ansible-playbook -vvv -u ansible -i inventory.yml playbook.yml
       env:
