@@ -45,7 +45,7 @@ jobs:
 
     - name: Download inventory file from Terraform Cloud
       run: |
-        terraform output -raw ansible_inventory > ansible/inventory.ini && cat ansible/inventory.ini
+        terraform output -raw ansible_inventory > ansible/inventory.ini
 
     - name: Install Ansible
       run: |
@@ -61,6 +61,6 @@ jobs:
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
 
     - name: Run Ansible Playbook
-      run: cd ansible && ansible-playbook -i inventory.ini main.yml
+      run: cd ansible && cat inventory.ini && ansible-playbook -u ansible -i inventory.ini main.yml
       env:
         DEFAULT_REMOTE_USER: ${{ secrets.ANSIBLE_USER }}
