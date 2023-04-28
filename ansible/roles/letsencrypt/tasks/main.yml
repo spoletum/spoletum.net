@@ -1,12 +1,38 @@
-- name: Generate a Let's Encrypt certificate
-  community.crypto.acme_certificate:
-    account_key_src: "{{ letsencrypt_account_key_path }}"
-    account_email: "{{ letsencrypt_account_email }}"
-    challenge: http-01
-    terms_agreed: yes
-    acme_directory: https://acme-v02.api.letsencrypt.org/directory
-    acme_version: 2
-    subject_alt_name:
-      - "DNS:{{ inventory_hostname }}"
-    dest: "/etc/letsencrypt/live/{{ inventory_hostname }}/cert.pem"
-    fullchain_dest: "/etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem"      
+- name: Install certbot
+  pip:
+    name:
+      - certbot
+      - certbot-nginx
+    executable: pip3
+  tags:
+    - nginx
+    - certbot
+
+- name: Register certbot
+  shell: |
+    certbot -n register --agree-tos --email me@domain.example
+    touch /etc/letsencrypt/.registered
+  args:
+    creates: /etc/letsencrypt/.registered
+  tags:
+    - nginx
+    - certbot
+
+- name: Setup cronjob for renewal
+  cron:
+    name: certbot-renewal
+    job: "/bin/bash -lc '/usr/local/bin/certbot -q renew'"
+    minute: "0"
+    hour: "14"
+  tags:
+    - nginx
+    - certbot
+
+- name: Get certificate
+  command: '/usr/local/bin/certbot -n --nginx certonly -d {{ hostname }}'
+  args:
+    creates: '/etc/letsencrypt/live/{{ hostname }}'
+  ignore_errors: true
+  tags:
+    - nginx
+    - certbot
