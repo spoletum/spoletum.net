@@ -35,18 +35,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        cli_config_credentials_token: ${{ secrets.TFC_TOKEN }}
-
-    - name: Terraform Init
-      run: terraform init
-
-    - name: Download inventory file from Terraform Cloud
-      run: |
-        terraform output -raw ansible_inventory > ansible/inventory.ini
-
     - name: Install Ansible
       run: |
         sudo apt-get update
@@ -59,9 +47,6 @@ jobs:
       run: |
         eval "$(ssh-agent -s)"
         echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
-
-    - name: Display the inventory file that we are going to use
-      run: cat /home/runner/work/spoletum.net/spoletum.net/ansible/inventory.ini 
 
     - name: Run Ansible Playbook
       run: cd ansible && ansible-playbook -vvv -u ansible -i inventory.ini main.yml
