@@ -62,13 +62,13 @@ resource "hcloud_server" "albornoz" {
   }))
 }
 
-resource "hetznerdns_zone" "spoletum_net" {
+# Zone is created manually as there is some work with Google Domains that needs to be done
+data "hetznerdns_zone" "spoletum_net" {
   name = "spoletum.net"
-  ttl  = 60
 }
 
 resource "hetznerdns_record" "example_com_root" {
-  zone_id = hetznerdns_zone.spoletum_net.id
+  zone_id = data.hetznerdns_zone.spoletum_net.id
   name    = "albornoz"
   value   = hcloud_server.albornoz.ipv4_address
   type    = "A"
