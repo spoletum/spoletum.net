@@ -8,3 +8,5 @@
     acme_version: 2
     subject_alt_name:
       - "DNS:{{ inventory_hostname }}"
+    dest: "/etc/letsencrypt/live/{{ inventory_hostname }}/cert.pem"
+    fullchain_dest: "/etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem"      
