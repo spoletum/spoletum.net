@@ -4,5 +4,7 @@
     account_email: "{{ letsencrypt_account_email }}"
     challenge: http-01
     terms_agreed: yes
+    acme_directory: https://acme-v02.api.letsencrypt.org/directory
+    acme_version: 2
     subject_alt_name:
       - "DNS:{{ inventory_hostname }}"
