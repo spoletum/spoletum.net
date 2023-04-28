@@ -1,2 +1,2 @@
 [public]
-albornoz.spoletum.net ansible_host=${ albornoz }
+albornoz.spoletum.net ansible_host="${ albornoz }"
