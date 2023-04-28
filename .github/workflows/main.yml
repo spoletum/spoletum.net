@@ -48,17 +48,13 @@ jobs:
       run: ansible-galaxy collection install community.crypto
 
     - name: Start SSH agent and load private key
-      run: |
-        eval "$(ssh-agent -s)"
-        echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" | ssh-add -
+      run: echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" > ansible.pem
 
-    - name: Test SSH connection
-      run: |
-        ssh -v -o StrictHostKeyChecking=no -i <(echo "$PRIVATE_KEY") ansible@albornoz.spoletum.net
-      env:
-        PRIVATE_KEY: ${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}
-        
+    # - name: Test SSH connection
+    #   run: |
+    #     ssh -v -o StrictHostKeyChecking=no -i ansible.pem ansible@albornoz.spoletum.net
+    #   env:
+    #     PRIVATE_KEY: ${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}
+
     - name: Run Ansible Playbook
-      run: ansible-playbook -u ansible -i inventory.yml -e 'ansible_ssh_common_args="-o StrictHostKeyChecking=no"' playbook.yml
-      env:
-        DEFAULT_REMOTE_USER: ${{ secrets.ANSIBLE_USER }}
+      run: ansible-playbook -u ansible -i inventory.yml -e 'ansible_ssh_common_args="-o StrictHostKeyChecking=no"' -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
