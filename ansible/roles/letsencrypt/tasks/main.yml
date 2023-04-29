@@ -5,6 +5,14 @@
   tags:
     - nginx
     - certbot
+
+- name: Install nginx package
+  dnf:
+    name: nginx
+    state: present
+  tags:
+    - nginx
+    - certbot
     
 - name: Install certbot
   pip:
