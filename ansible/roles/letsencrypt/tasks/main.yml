@@ -1,3 +1,11 @@
+- name: Install cronie package
+  dnf:
+    name: cronie
+    state: present
+  tags:
+    - nginx
+    - certbot
+    
 - name: Install certbot
   pip:
     name:
