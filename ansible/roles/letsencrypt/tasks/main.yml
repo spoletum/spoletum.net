@@ -45,10 +45,8 @@
     - certbot
 
 - name: Get certificate
-  command: '/usr/local/bin/certbot -n --nginx certonly -d {{ inventory_hostname  }}'
-  args:
-    creates: '/etc/letsencrypt/live/{{ inventory_hostname  }}'
-  ignore_errors: true
+  command: "/usr/local/bin/certbot -n --nginx certonly --agree-tos --email {{ letsencrypt_account_email }} -d {{ inventory_hostname  }}"
+  creates: '/etc/letsencrypt/live/{{ inventory_hostname  }}'
   tags:
     - nginx
     - certbot
