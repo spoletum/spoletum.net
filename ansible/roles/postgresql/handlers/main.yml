@@ -1,0 +1,4 @@
+- name: Start PostgreSQL
+  systemd:
+    name: postgresql
+    state: started

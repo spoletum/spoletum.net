@@ -1,6 +1,5 @@
-- name: Install PostgreSQL
+- name: Install PostgreSQL server
   dnf:
-    name: postgresql
+    name: postgresql-server
     state: present
-  tags:
-    - postgresql
+  notify: Start PostgreSQL
