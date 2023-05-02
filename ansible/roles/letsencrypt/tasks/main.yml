@@ -1,4 +1,4 @@
-- name: Install cronie package
+- name: Install cronie
   dnf:
     name: cronie
     state: present
@@ -6,14 +6,22 @@
     - nginx
     - certbot
 
-- name: Install nginx package
+- name: Install nginx
   dnf:
     name: nginx
     state: present
   tags:
     - nginx
     - certbot
-    
+
+- name: Install pip
+  dnf:
+    name: python3-pip
+    state: present
+  tags:
+    - nginx
+    - certbot
+
 - name: Install certbot
   pip:
     name:
@@ -23,7 +31,6 @@
   tags:
     - nginx
     - certbot
-
 
 - name: Setup cronjob for renewal
   cron:
