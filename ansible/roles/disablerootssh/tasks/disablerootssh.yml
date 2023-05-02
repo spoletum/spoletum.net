@@ -1,0 +1,7 @@
+- name: Modify SSH configuration file
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+    backup: true
+  notify: Restart sshd

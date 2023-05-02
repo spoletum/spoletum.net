@@ -1,4 +1,10 @@
-- name: Install TLS certificate
+- name: Execute common tasks for all servers
+  hosts: all
+  become: true
+  roles:
+    - disablerootssh
+
+- name: Process publicly-facing servers
   hosts: public
   vars:
     letsencrypt_account_key_path: "{{ lookup('env', 'LE_ACCOUNT_KEY') }}"
@@ -7,7 +13,7 @@
     - letsencrypt
   become: true
 
-- name: Install PosgreSQL
+- name: Install PosgreSQL servers
   hosts: postgresql
   roles:
     - postgresql
