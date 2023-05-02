@@ -24,15 +24,6 @@
     - nginx
     - certbot
 
-- name: Register certbot
-  shell: |
-    certbot -n register --agree-tos --email me@domain.example
-    touch /etc/letsencrypt/.registered
-  args:
-    creates: /etc/letsencrypt/.registered
-  tags:
-    - nginx
-    - certbot
 
 - name: Setup cronjob for renewal
   cron:
@@ -45,7 +36,7 @@
     - certbot
 
 - name: Get certificate
-  command: "/usr/local/bin/certbot -n --nginx certonly --agree-tos --email {{ letsencrypt_account_email }} -d {{ inventory_hostname  }}"
+  command: '/usr/local/bin/certbot -n --nginx certonly --agree-tos --email {{ letsencrypt_account_email }} -d {{ inventory_hostname  }}'
   creates: '/etc/letsencrypt/live/{{ inventory_hostname  }}'
   tags:
     - nginx
