@@ -51,6 +51,6 @@ jobs:
       run: echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" > ansible.pem && chmod 400 ansible.pem
 
     - name: Run Ansible Playbook
-      run: ansible-playbook -v -u ansible -i inventory.yml -e 'ansible_ssh_common_args="-o StrictHostKeyChecking=no"' -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
+      run: ansible-playbook -u ansible -i inventory.yml -e 'ansible_ssh_common_args="-o StrictHostKeyChecking=no"' -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
       env:
         LE_ACCOUNT_EMAIL: ${{ secrets.LE_ACCOUNT_EMAIL }}

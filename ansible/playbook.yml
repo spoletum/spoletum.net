@@ -1,7 +1,7 @@
-- name: Execute common tasks for all servers
+- name: Harden server configuration
   hosts: all
   roles:
-    - disablerootssh
+    - hardened
   become: true
 
 - name: Process publicly-facing servers

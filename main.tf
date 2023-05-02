@@ -68,7 +68,7 @@ data "hetznerdns_zone" "spoletum_net" {
   name = "spoletum.net"
 }
 
-resource "hetznerdns_record" "example_com_root" {
+resource "hetznerdns_record" "albornoz" {
   zone_id = data.hetznerdns_zone.spoletum_net.id
   name    = "albornoz"
   value   = hcloud_server.albornoz.ipv4_address
