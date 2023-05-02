@@ -7,7 +7,6 @@
 - name: Process publicly-facing servers
   hosts: public
   vars:
-    letsencrypt_account_key_path: "{{ lookup('env', 'LE_ACCOUNT_KEY') }}"
     letsencrypt_account_email: "{{ lookup('env', 'LE_ACCOUNT_EMAIL') }}"
   roles:
     - letsencrypt

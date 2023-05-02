@@ -46,6 +46,7 @@ resource "hcloud_network_subnet" "infra" {
 resource "hcloud_server_network" "name" {
   network_id = hcloud_network_subnet.infra.network_id
   server_id  = hcloud_server.albornoz.id
+  alias_ips  = [] # https://github.com/hetznercloud/terraform-provider-hcloud/issues/650
 }
 
 resource "hcloud_server" "albornoz" {
@@ -55,7 +56,6 @@ resource "hcloud_server" "albornoz" {
   datacenter  = "fsn1-dc14"
   network {
     network_id = hcloud_network.albornoz.id
-    subnet_id  = hcloud_network_subnet.infra.id
   }
   ssh_keys = [hcloud_ssh_key.personal.name]
   user_data = base64encode(templatefile("${path.module}/templates/cloud-init.tpl", {
