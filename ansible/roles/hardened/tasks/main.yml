@@ -6,5 +6,5 @@
     state: "{{ item.state }}"
   loop:
     - { regexp: "PermitRootLogin", line: "PermitRootLogin no", state: "present" }
-    - { regexp: "PermitRootLogin prohibit-password", state: "absent" }
+    - { regexp: "PermitRootLogin prohibit-password", line: "", state: "absent" }
   notify: Restart sshd
