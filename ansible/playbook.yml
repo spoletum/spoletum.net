@@ -1,8 +1,8 @@
 - name: Execute common tasks for all servers
   hosts: all
-  become: true
   roles:
     - disablerootssh
+  become: true
 
 - name: Process publicly-facing servers
   hosts: public
@@ -17,3 +17,4 @@
   hosts: postgresql
   roles:
     - postgresql
+  become: true
