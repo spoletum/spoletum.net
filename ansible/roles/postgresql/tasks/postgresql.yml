@@ -1,0 +1,6 @@
+- name: Install PostgreSQL
+  dnf:
+    name: postgresql
+    state: present
+  tags:
+    - postgresql

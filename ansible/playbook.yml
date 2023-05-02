@@ -6,3 +6,8 @@
   roles:
     - letsencrypt
   become: true
+
+- name: Install PosgreSQL
+  hosts: postgresql
+  roles:
+    - postgresql
