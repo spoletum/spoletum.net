@@ -29,7 +29,7 @@ jobs:
         working-directory: terraform
 
       - name: Generate inventory file
-        run: terraform output -raw inventory > ../ansible/inventory.ini
+        run: terraform output -raw inventory > ../ansible/inventory.yml
         working-directory: terraform
   
       - name: Install Ansible
@@ -47,7 +47,7 @@ jobs:
         working-directory: ansible
 
       - name: Run Ansible Playbook
-        run: ansible-playbook -vv -i inventory.ini -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
+        run: ansible-playbook -vv -i inventory.yml -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
         env:
           LE_ACCOUNT_EMAIL: ${{ secrets.LE_ACCOUNT_EMAIL }}
         working-directory: ansible
