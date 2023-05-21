@@ -4,7 +4,7 @@ bootcmd:
 runcmd:
   - systemctl restart sshd
 users:
-  - name: ansible
+  - name: ${ansible_user}
     sudo: ALL=(ALL) NOPASSWD:ALL
     groups: wheel
     ssh_import_id: None

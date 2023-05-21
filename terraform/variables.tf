@@ -13,3 +13,7 @@ variable "SSH_PUBLIC_KEY" {
 variable "ANSIBLE_PUBLIC_KEY" {
   sensitive = true
 }
+
+variable "ANSIBLE_USER" {
+  sensitive = true
+}
