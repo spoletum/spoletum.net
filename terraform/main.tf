@@ -48,7 +48,7 @@ resource "hcloud_server_network" "name" {
   server_id  = hcloud_server.albornoz.id
 }
 
-Albornoz is the jump host for system management
+# Albornoz is the jump host for system management
 resource "hcloud_server" "albornoz" {
   name        = "albornoz"
   server_type = "cax31"
