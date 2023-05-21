@@ -48,22 +48,22 @@ resource "hcloud_server_network" "name" {
   server_id  = hcloud_server.albornoz.id
 }
 
-# Albornoz is the jump host for system management
-# resource "hcloud_server" "albornoz" {
-#   name        = "albornoz"
-#   server_type = "cax31"
-#   image       = "fedora-37"
-#   datacenter  = "fsn1-dc14"
-#   network {
-#     network_id = hcloud_network.albornoz.id
-#     alias_ips  = [] # https://github.com/hetznercloud/terraform-provider-hcloud/issues/650
-#   }
-#   ssh_keys = [hcloud_ssh_key.personal.name]
-#   user_data = base64encode(templatefile("${path.module}/templates/cloud-init.tpl", {
-#     ansible_user       = var.ANSIBLE_USER
-#     ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
-#   }))
-# }
+Albornoz is the jump host for system management
+resource "hcloud_server" "albornoz" {
+  name        = "albornoz"
+  server_type = "cax31"
+  image       = "fedora-37"
+  datacenter  = "fsn1-dc14"
+  network {
+    network_id = hcloud_network.albornoz.id
+    alias_ips  = [] # https://github.com/hetznercloud/terraform-provider-hcloud/issues/650
+  }
+  ssh_keys = [hcloud_ssh_key.personal.name]
+  user_data = base64encode(templatefile("${path.module}/templates/cloud-init.tpl", {
+    ansible_user       = var.ANSIBLE_USER
+    ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
+  }))
+}
 
 # The control plane nodes will contain Vault, Consul, and the Nomad Server
 resource "hcloud_server" "controlplane" {
@@ -103,6 +103,10 @@ resource "hcloud_server" "worker" {
     ansible_user       = var.ANSIBLE_USER
     ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
   }))
+  public_net {
+    ipv4_enabled = false
+    ipv6_enabled = false
+  }
 }
 
 # Zone is created manually as there is some work with Google Domains that needs to be done
