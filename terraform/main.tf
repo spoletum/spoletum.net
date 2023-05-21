@@ -63,7 +63,7 @@ resource "hcloud_server" "albornoz" {
     ansible_user       = var.ANSIBLE_USER
     ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
   }))
-  count = 0
+  count = 0 # Disable for now
 }
 
 # The control plane nodes will contain Vault, Consul, and the Nomad Server
