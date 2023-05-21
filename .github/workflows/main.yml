@@ -42,6 +42,10 @@ jobs:
         run: echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" > ansible.pem && chmod 400 ansible.pem
         working-directory: ansible
 
+      - name: Display inventory.ini
+        run: cat inventory.ini
+        working-directory: ansible
+
       - name: Run Ansible Playbook
         run: ansible-playbook -vv -i inventory.ini -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
         env:
