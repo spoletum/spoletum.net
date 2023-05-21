@@ -67,7 +67,7 @@ resource "hcloud_server" "albornoz" {
 
 # The control plane nodes will contain Vault, Consul, and the Nomad Server
 resource "hcloud_server" "controlplane" {
-  count       = 3
+  count       = 1
   name        = "controlplane-${format("%02d", count.index)}"
   server_type = "cax31"
   image       = "fedora-37"
