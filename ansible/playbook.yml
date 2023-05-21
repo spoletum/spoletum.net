@@ -5,15 +5,15 @@
   become: true
 
 - name: Process publicly-facing servers
-  hosts: public
+  hosts: bastion
   vars:
     letsencrypt_account_email: "{{ lookup('env', 'LE_ACCOUNT_EMAIL') }}"
   roles:
     - letsencrypt
   become: true
 
-- name: Install PosgreSQL servers
-  hosts: postgresql
-  roles:
-    - postgresql
-  become: true
+# - name: Install PosgreSQL servers
+#   hosts: postgresql
+#   roles:
+#     - postgresql
+#   become: true

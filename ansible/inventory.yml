@@ -1,8 +1,0 @@
-all:
-  children:
-    public:
-      hosts:
-        albornoz.spoletum.net:
-    postgresql:
-      hosts:
-        albornoz.spoletum.net:
