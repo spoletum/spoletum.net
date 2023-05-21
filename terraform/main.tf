@@ -83,6 +83,24 @@ resource "hcloud_server" "controlplane" {
   }))
 }
 
+# The control plane nodes will contain Vault, Consul, and the Nomad Server
+resource "hcloud_server" "worker" {
+  count       = 3
+  name        = "worker-${format("%02d", count.index)}"
+  server_type = "cax31"
+  image       = "fedora-37"
+  datacenter  = "fsn1-dc14"
+  network {
+    network_id = hcloud_network.albornoz.id
+    alias_ips  = [] # https://github.com/hetznercloud/terraform-provider-hcloud/issues/650
+  }
+  ssh_keys = [hcloud_ssh_key.personal.name]
+  user_data = base64encode(templatefile("${path.module}/templates/cloud-init.tpl", {
+    ansible_user       = var.ANSIBLE_USER
+    ansible_public_key = var.ANSIBLE_PUBLIC_KEY,
+  }))
+}
+
 # Zone is created manually as there is some work with Google Domains that needs to be done
 data "hetznerdns_zone" "spoletum_net" {
   name = "spoletum.net"
