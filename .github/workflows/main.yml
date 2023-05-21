@@ -6,10 +6,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: terraform
-
     steps:
 
       - name: Checkout
@@ -28,33 +24,23 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+        working-directory: terraform
+
+      - name: Generate inventory file
+        run: terraform output -raw inventory > ../ansible/inventory.ini
+        working-directory: terraform
   
-  ansible:
+      - name: Install Ansible
+        run: sudo apt-get install -y ansible
 
-    needs: terraform
+      - name: Install Ansible plug-ins
+        run: ansible-galaxy collection install community.crypto
 
-    runs-on: ubuntu-latest
+      - name: Start SSH agent and load private key
+        run: echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" > ansible.pem && chmod 400 ansible.pem
 
-    defaults:
-      run:
+      - name: Run Ansible Playbook
+        run: ansible-playbook -u ansible -i inventory.yml -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
+        env:
+          LE_ACCOUNT_EMAIL: ${{ secrets.LE_ACCOUNT_EMAIL }}
         working-directory: ansible
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Install Ansible
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y ansible
-
-    - name: Install Ansible plug-ins
-      run: ansible-galaxy collection install community.crypto
-
-    - name: Start SSH agent and load private key
-      run: echo "${{ secrets.ANSIBLE_PRIVATE_KEY_CONTENT }}" > ansible.pem && chmod 400 ansible.pem
-
-    - name: Run Ansible Playbook
-      run: ansible-playbook -u ansible -i inventory.yml -e 'ansible_ssh_common_args="-o StrictHostKeyChecking=no"' -e 'ansible_ssh_private_key_file=ansible.pem' playbook.yml
-      env:
-        LE_ACCOUNT_EMAIL: ${{ secrets.LE_ACCOUNT_EMAIL }}
