@@ -57,6 +57,4 @@
         type: A
         value: "{{ elysium_dev.hcloud_server.ipv4_address }}"
         state: present
-        hetzner_token: "{{ lookup('env', 'HCLOUD_TOKEN') }}"
-
-
+        hetzner_token: "{{ lookup('env', 'HCLOUD_DNS_TOKEN') }}"
