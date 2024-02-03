@@ -55,5 +55,5 @@
         domain: spoletum.net
         name: '*'
         type: A
-        value: "{{ elysium_dev.server.ipv4_address }}"
+        value: "{{ elysium_dev.hcloud_server.ipv4_address }}"
         state: present
