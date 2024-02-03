@@ -46,6 +46,14 @@
     - name: Write the Ansible inventory file
       ansible.builtin.template:
         src: templates/inventory.ini.j2
-        dest: ../inventory.ini
+        dest: ../../inventories/inventory.ini
         mode: '0600'
       delegate_to: localhost
+
+    - name: Create DNS entry for elysium-dev
+      hetzner.hcloud.dns_record:
+        domain: spoletum.net
+        name: '*'
+        type: A
+        value: "{{ elysium_dev.server.ipv4_address }}"
+        state: present
