@@ -1,4 +1,7 @@
 all:
-  hosts:
-    k0s-controller:
-      ansible_host: spoletum.net
+  children:
+    k0s:
+      children:
+        k0s-controller:
+          hosts:
+            spoletum.net: {}

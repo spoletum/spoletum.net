@@ -44,17 +44,10 @@
         # private_networks:
         #   - private
 
-    - name: Write the Ansible inventory file
-      ansible.builtin.template:
-        src: templates/inventory.ini.j2
-        dest: ../../../inventories/inventory.ini
-        mode: '0600'
-      delegate_to: localhost
-
     - name: Create DNS entry for elysium-dev
       community.dns.hetzner_dns_record:
         zone_name: spoletum.net
-        name: '*'
+        record: '@'
         type: A
         value: "{{ elysium_dev.hcloud_server.ipv4_address }}"
         state: present
