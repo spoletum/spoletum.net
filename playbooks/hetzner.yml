@@ -1,0 +1,43 @@
+- name: Create private network
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create network
+      hetzner.hcloud.network:
+        name: private
+        ip_range: 10.0.0.0/16
+        state: present
+
+    - name: Create subnets
+      hetzner.hcloud.subnetwork:
+        network: private
+        ip_range: "{{ item }}"
+        network_zone: eu-central
+        type: server
+        state: present
+      loop:
+        - 10.0.0.0/24
+
+    - name: Create SSH key
+      hetzner.hcloud.ssh_key:
+        name: elysium-dev
+        public_key: "{{ ssh_key }}"
+
+    - name: Create placement group
+      hetzner.hcloud.placement_group:
+        name: elysium-dev
+        type: spread
+        state: present
+
+    - name: Create server
+      hetzner.hcloud.server:
+        name: elysium-dev
+        image: ubuntu-22.04
+        server_type: cax41
+        ssh_keys:
+          - elysium-dev
+        placement_group: elysium-dev
+        state: present
+        # private_networks:
+        #   - private

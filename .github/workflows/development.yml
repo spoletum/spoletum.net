@@ -1,0 +1,24 @@
+on: [push]
+
+jobs:
+  
+  ansible:
+
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Ansible
+        run: pip3 install ansible
+          
+      - name: Install Ansible Galaxy dependencies
+        run: ansible-galaxy collection install hetzner.hcloud
+
+      - name: Run Ansible Playbook
+        env:
+          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+        run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook -i inventories/elysium/dev/hetzner.yaml --vault-password-file=/dev/stdin playbooks/hetzner.yml

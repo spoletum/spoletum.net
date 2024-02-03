@@ -1,8 +1,0 @@
-- name: Install PostgreSQL server
-  dnf:
-    name: postgresql-server
-    state: present
-
-- name: Initialize the database
-  command: /usr/bin/postgresql-setup --initdb
-  notify: Start PostgreSQL
