@@ -51,7 +51,7 @@
       delegate_to: localhost
 
     - name: Create DNS entry for elysium-dev
-      hetzner.hcloud.dns_record:
+      community.dns.hetzner_dns_record:
         domain: spoletum.net
         name: '*'
         type: A
