@@ -1,12 +1,10 @@
 on: [push]
 
-
-
 jobs:
   
   ansible:
 
-    runs-on: spoletum.net
+    runs-on: self-hosted
     environment: development
 
     steps:
