@@ -23,3 +23,6 @@ jobs:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
         run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook -i inventories/elysium/dev/hetzner.yaml --vault-password-file=/dev/stdin playbooks/hetzner.yml
+
+      - name: Display the inventory file
+        run: cat inventory.ini
