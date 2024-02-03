@@ -52,7 +52,7 @@
 
     - name: Create DNS entry for elysium-dev
       community.dns.hetzner_dns_record:
-        domain: spoletum.net
+        zone_name: spoletum.net
         name: '*'
         type: A
         value: "{{ elysium_dev.hcloud_server.ipv4_address }}"
