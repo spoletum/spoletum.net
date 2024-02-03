@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "spoletum-net"
+version = "0.0.1"
+description = "Ansible provisioning for the spoletum.net domain"
+authors = ["Alessandro Santini <alessandro.santini@toremo.com>"]
+readme = "README.md"
+packages = [{include = "spoletum"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ansible = "~= 9.0.0"
+hcloud = "~= 1.33.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

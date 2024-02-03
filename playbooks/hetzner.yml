@@ -3,26 +3,26 @@
   gather_facts: false
 
   tasks:
+    - name: Create SSH key
+      hetzner.hcloud.ssh_key:
+        name: elysium-dev
+        public_key: "{{ ssh_key }}"
+
     - name: Create network
       hetzner.hcloud.network:
         name: private
         ip_range: 10.0.0.0/16
         state: present
 
-    - name: Create subnets
-      hetzner.hcloud.subnetwork:
-        network: private
-        ip_range: "{{ item }}"
-        network_zone: eu-central
-        type: server
-        state: present
-      loop:
-        - 10.0.0.0/24
-
-    - name: Create SSH key
-      hetzner.hcloud.ssh_key:
-        name: elysium-dev
-        public_key: "{{ ssh_key }}"
+    # - name: Create subnets
+    #   hetzner.hcloud.subnetwork:
+    #     network: private
+    #     ip_range: "{{ item }}"
+    #     network_zone: eu-central
+    #     type: server
+    #     state: present
+    #   loop:
+    #     - 10.0.0.0/24
 
     - name: Create placement group
       hetzner.hcloud.placement_group:
@@ -39,5 +39,13 @@
           - elysium-dev
         placement_group: elysium-dev
         state: present
+      register: elysium_dev
         # private_networks:
         #   - private
+
+    - name: Write the Ansible inventory file
+      ansible.builtin.template:
+        src: templates/inventory.ini.j2
+        dest: inventory.ini
+        mode: '0600'
+      delegate_to: localhost
