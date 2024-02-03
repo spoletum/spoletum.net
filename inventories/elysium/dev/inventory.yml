@@ -1,5 +1,4 @@
 all:
   hosts:
-    localhost:
-      ansible_connection: local
-      gather_facts: no
+    k0s-controller:
+      ansible_host: spoletum.net
