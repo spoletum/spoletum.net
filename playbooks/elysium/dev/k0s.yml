@@ -4,8 +4,14 @@
   gather_facts: true
   tasks:
     - name: Install k0s
-      # Install k0s by getting it from the internet as per instructions
-      # https://docs.k0sproject.io/main/installation/
-      ansible.builtin.command:
-        cmd: curl -sSLf https://get.k0s.sh | sudo sh
-        creates: /usr/local/bin/k0s
+      ansible.builtin.get_url:
+        url: "https://github.com/k0sproject/k0s/releases/download/v1.29.1%2Bk0s.0/k0s-v1.29.1+k0s.0-arm64"
+        dest: "/usr/local/bin/k0s"
+        mode: "0755"
+        checksum: "sha256:783d67d6eb33136639e55649464abdc8c33b4f6e95dae3a9a19287b287d05204"
+      notify: restart k0s
+
+    - name: Initialize k0s controller
+      ansible.builtin.command: k0s install controller --single
+      creates: /etc/systemd/system/k0scontroller.service
+      notify: start k0s controller
