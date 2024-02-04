@@ -6,4 +6,5 @@
       ansible.builtin.unarchive:
         src: "https://github.com/fluxcd/flux2/releases/download/v2.2.2/flux_2.2.2_linux_arm64.tar.gz"
         dest: "/usr/local/bin"
+        remote_src: true
         creates: "/usr/local/bin/flux"
