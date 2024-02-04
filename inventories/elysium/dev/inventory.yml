@@ -2,5 +2,7 @@
 all:
   children:
     k0s_controller:
+      vars:
+        ansible_user: ansible
       hosts:
-        spoletum.net: {}
+        spoletum.net:
