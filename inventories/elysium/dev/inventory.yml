@@ -1,6 +1,6 @@
 # This inventory represents the k0s cluster in the dev environment
 all:
   children:
-    k0s-controller:
+    k0s_controller:
       hosts:
         spoletum.net: {}
