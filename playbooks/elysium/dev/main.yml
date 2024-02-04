@@ -61,6 +61,6 @@
     - name: Install k0s
       # Install k0s by getting it from the internet as per instructions
       # https://docs.k0sproject.io/main/installation/
-      ansible.builtin.command: |
-        curl -sSLf https://get.k0s.sh | sudo sh
-      creates: /usr/local/bin/k0s
+      ansible.builtin.command: 
+        cmd: curl -sSLf https://get.k0s.sh | sudo sh
+        creates: /usr/local/bin/k0s
