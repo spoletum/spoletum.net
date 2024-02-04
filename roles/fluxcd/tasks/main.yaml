@@ -1,0 +1,9 @@
+- name: Bootstrap FluxCD
+  become: true
+  block:
+
+    - name: Install FluxCD
+      ansible.builtin.unarchive:
+        src: "https://github.com/fluxcd/flux2/releases/download/v2.2.2/flux_2.2.2_linux_arm64.tar.gz"
+        dest: "/usr/local/bin"
+        creates: "/usr/local/bin/flux"

@@ -3,4 +3,8 @@
   become: true
   gather_facts: true
   roles:
-    - k0s_controller
+    - k0s
+    - fluxcd
+  vars:
+    k0s_controller: true
+    k0s_worker: false

@@ -1,5 +1,0 @@
-- name: start k0s controller
-  ansible.builtin.service:
-    name: k0scontroller
-    state: started
-    enabled: yes
