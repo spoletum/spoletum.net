@@ -53,14 +53,13 @@
         hetzner_token: "{{ lookup('env', 'HCLOUD_DNS_TOKEN') }}"
 
 - name: Configure Kubernetes controllers
-  hosts: k8s_controller
+  hosts: k0s_controller
   become: true
   gather_facts: true
-
   tasks:
     - name: Install k0s
       # Install k0s by getting it from the internet as per instructions
       # https://docs.k0sproject.io/main/installation/
-      ansible.builtin.command: 
+      ansible.builtin.command:
         cmd: curl -sSLf https://get.k0s.sh | sudo sh
         creates: /usr/local/bin/k0s
