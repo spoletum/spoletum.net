@@ -1,8 +1,6 @@
 - name: Create private network
   hosts: localhost
   connection: local
-  vars_files:
-    - vars/hetzner.yml
   gather_facts: false
 
   tasks:
@@ -16,16 +14,6 @@
         name: private
         ip_range: 10.0.0.0/16
         state: present
-
-    # - name: Create subnets
-    #   hetzner.hcloud.subnetwork:
-    #     network: private
-    #     ip_range: "{{ item }}"
-    #     network_zone: eu-central
-    #     type: server
-    #     state: present
-    #   loop:
-    #     - 10.0.0.0/24
 
     - name: Create placement group
       hetzner.hcloud.placement_group:
@@ -47,7 +35,6 @@
           package_update: true
           packages:
             - curl
-
           users:
             - name: ansible
               sudo: ALL=(ALL) NOPASSWD:ALL
