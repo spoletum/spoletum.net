@@ -46,7 +46,7 @@
     - name: Create DNS entry
       community.dns.hetzner_dns_record:
         zone_name: spoletum.net
-        record: '@'
+        record: "@.spoletum.net"
         type: A
         value: "{{ elysium_dev.hcloud_server.ipv4_address }}"
         state: present
