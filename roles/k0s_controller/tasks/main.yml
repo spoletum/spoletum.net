@@ -14,4 +14,9 @@
       ansible.builtin.command:
         cmd: k0s install controller --single
         creates: /etc/systemd/system/k0scontroller.service
-      notify: start k0s controller
+    
+    - name: start k0s controller
+      ansible.builtin.service:
+        name: k0scontroller
+        state: started
+        enabled: yes
