@@ -3,4 +3,4 @@
   become: true
   gather_facts: true
   roles:
-    - k0s
+    - k0s_controller
