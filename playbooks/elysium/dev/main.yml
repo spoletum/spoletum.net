@@ -53,7 +53,7 @@
         hetzner_token: "{{ lookup('env', 'HCLOUD_DNS_TOKEN') }}"
 
 - name: Configure Kubernetes controllers
-  hosts: k8s_controllers
+  hosts: k8s_controller
   become: true
   gather_facts: true
 
