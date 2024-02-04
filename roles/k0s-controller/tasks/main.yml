@@ -11,6 +11,7 @@
       notify: restart k0s
 
     - name: Initialize k0s controller
-      ansible.builtin.command: k0s install controller --single
-      creates: /etc/systemd/system/k0scontroller.service
+      ansible.builtin.command:
+        cmd: k0s install controller --single
+        creates: /etc/systemd/system/k0scontroller.service
       notify: start k0s controller
