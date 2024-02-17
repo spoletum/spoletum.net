@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
   
-  ansible:
+  infrastructure:
 
     runs-on: self-hosted
     environment: development
@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Ansible
-        run: pip3 install poetry ansible
+        run: pip3 install ansible
           
       - name: Install Ansible Galaxy dependencies
         run: ansible-galaxy collection install hetzner.hcloud
@@ -23,4 +23,23 @@ jobs:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
           HCLOUD_DNS_TOKEN: ${{ secrets.HCLOUD_DNS_TOKEN }}
-        run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i inventories/elysium/dev/inventory.yml playbooks/elysium/dev/main.yml
+        run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i localhost playbooks/elysium/dev.yml
+
+  provisioning:
+
+      runs-on: self-hosted
+      environment: development
+
+      steps:
+
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Setup Ansible
+          run: pip3 install ansible
+
+        - name: Build the infrastructure
+          env:
+            ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i inventories/elysium/dev/inventory.yml playbooks/elysium/k0s.yml
+  

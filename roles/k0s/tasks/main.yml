@@ -2,20 +2,19 @@
   become: true
   block:
 
-    - name: Install k0s
+    - name: k0s binaries are present
       ansible.builtin.get_url:
-        url: "https://github.com/k0sproject/k0s/releases/download/v1.29.1%2Bk0s.0/k0s-v1.29.1+k0s.0-arm64"
+        url: "https://github.com/k0sproject/k0s/releases/download/v1.29.1%2Bk0s.1/k0s-v1.29.1+k0s.1-arm64"
         dest: "/usr/local/bin/k0s"
         mode: "0755"
         checksum: "sha256:783d67d6eb33136639e55649464abdc8c33b4f6e95dae3a9a19287b287d05204"
-      notify: restart k0s
 
-    - name: Initialize k0s controller
+    - name: k0s controller exists
       ansible.builtin.command:
         cmd: k0s install controller --single
         creates: /etc/systemd/system/k0scontroller.service
 
-    - name: Start k0s controller
+    - name: k0s controller is started and enabled
       ansible.builtin.service:
         name: k0scontroller
         state: started
