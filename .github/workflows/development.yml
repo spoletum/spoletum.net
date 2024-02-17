@@ -1,4 +1,5 @@
-on: [push]
+name: Elysium Development Infrastructure
+on: workflow_run
 
 jobs:
   
@@ -29,6 +30,7 @@ jobs:
 
       runs-on: self-hosted
       environment: development
+      needs: infrastructure
 
       steps:
 
@@ -38,7 +40,7 @@ jobs:
         - name: Setup Ansible
           run: pip3 install ansible
 
-        - name: Build the infrastructure
+        - name: Deploy K0s
           env:
             ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i inventories/elysium/dev/inventory.yml playbooks/elysium/k0s.yml
