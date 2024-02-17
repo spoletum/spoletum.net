@@ -7,7 +7,7 @@
         url: "https://github.com/k0sproject/k0s/releases/download/v1.29.1%2Bk0s.1/k0s-v1.29.1+k0s.1-arm64"
         dest: "/usr/local/bin/k0s"
         mode: "0755"
-        checksum: "sha256:783d67d6eb33136639e55649464abdc8c33b4f6e95dae3a9a19287b287d05204"
+        checksum: "sha256:6a57815f78e4a1e1dca80c8f596fe2487341674de11a93c202eb529c9c5edd6d"
 
     - name: k0s controller exists
       ansible.builtin.command:
