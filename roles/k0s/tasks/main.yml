@@ -19,3 +19,7 @@
         name: k0scontroller
         state: started
         enabled: true
+      notify: "k0s changed"
+
+
+    
