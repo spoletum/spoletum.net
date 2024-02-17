@@ -23,7 +23,7 @@ jobs:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
           HCLOUD_DNS_TOKEN: ${{ secrets.HCLOUD_DNS_TOKEN }}
-        run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i localhost playbooks/elysium/dev.yml
+        run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i inventories/elysium/dev/inventory.yml playbooks/elysium/hetzner.yml
 
   provisioning:
 
