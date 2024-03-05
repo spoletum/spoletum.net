@@ -11,6 +11,10 @@ terraform {
       source  = "hetznercloud/hcloud"
       version = "1.45.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.12.1"
+    }
   }
 }
 

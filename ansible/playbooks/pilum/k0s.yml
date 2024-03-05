@@ -1,6 +1,0 @@
-- name: Configure Kubernetes controllers
-  hosts: k0s_controller
-  become: true
-  gather_facts: true
-  roles:
-    - k0s

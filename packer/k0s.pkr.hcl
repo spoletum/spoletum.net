@@ -37,9 +37,12 @@ build {
   provisioner "shell" {
     inline = [
       "curl -sL https://github.com/k0sproject/k0s/releases/download/${var.k0s_version}/k0s-${var.k0s_version}-${var.k0s_arch} -o k0s",
-      "sudo install k0s /usr/local/bin/",
-      "sudo k0s install controller --single",
-      "sudo systemctl enable k0scontroller"
+      "install k0s /usr/local/bin/",
+      "k0s install controller --single",
+      "systemctl enable k0scontroller",
+      "curl -sL https://get.helm.sh/helm-v3.14.2-linux-${var.k0s_arch}.tar.gz -o helm-v3.14.2-linux-${var.k0s_arch}.tar.gz",
+      "tar -zxf helm-v3.14.2-linux-arm64.tar.gz",
+      "install linux-${var.k0s_arch}/helm /usr/local/bin/"
     ]
   }
 }
