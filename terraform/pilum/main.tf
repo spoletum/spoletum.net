@@ -36,3 +36,9 @@ resource "hcloud_server" "pilum" {
   ssh_keys           = [hcloud_ssh_key.default.id]
   placement_group_id = hcloud_placement_group.default.id
 }
+
+resource "hcloud_rdns" "pilum" {
+  server_id  = hcloud_server.pilum.id
+  ip_address = hcloud_server.pilum.ipv4_address
+  dns_ptr    = "spoletum.net"
+}
