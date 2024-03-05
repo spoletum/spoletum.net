@@ -4,7 +4,7 @@
 
     - name: Install FluxCD
       ansible.builtin.unarchive:
-        src: "https://github.com/fluxcd/flux2/releases/download/v2.2.2/flux_2.2.2_linux_arm64.tar.gz"
+        src: "https://github.com/fluxcd/flux2/releases/download/v{{ fluxcd_version }}/flux_{{ fluxcd_version }}_{{ fluxcd_os }}_{{ fluxcd_arch }}.tar.gz"
         dest: "/usr/local/bin"
         remote_src: true
         owner: root

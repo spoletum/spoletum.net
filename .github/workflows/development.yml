@@ -1,47 +1,30 @@
-name: Elysium Development Infrastructure
-on: workflow_run
+name: Pilum Terraforming
+
+on: push
 
 jobs:
   
-  infrastructure:
+  terraform:
 
-    runs-on: self-hosted
-    environment: development
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform/pilum
 
     steps:
 
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Ansible
-        run: pip3 install ansible
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.4"
           
-      - name: Install Ansible Galaxy dependencies
-        run: ansible-galaxy collection install hetzner.hcloud
+      - name: Terraform Init
+        run: terraform init
 
-      - name: Build the infrastructure
-        env:
-          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
-          HCLOUD_DNS_TOKEN: ${{ secrets.HCLOUD_DNS_TOKEN }}
-        run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i inventories/elysium/dev/inventory.yml playbooks/elysium/hetzner.yml
+      - name: Terraform Plan
+        run: terraform plan -out=terraform.tfplan
 
-  software:
-
-      runs-on: self-hosted
-      environment: development
-      needs: infrastructure
-
-      steps:
-
-        - name: Checkout
-          uses: actions/checkout@v3
-
-        - name: Setup Ansible
-          run: pip3 install ansible
-
-        - name: Deploy K0s
-          env:
-            ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-          run: echo $ANSIBLE_VAULT_PASSWORD | ansible-playbook --vault-password-file=/dev/stdin -i inventories/elysium/dev/inventory.yml playbooks/elysium/k0s.yml
-  
+      - name: Terraform Apply
+        run: terraform apply -auto-approve terraform.tfplan

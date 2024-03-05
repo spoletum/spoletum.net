@@ -1,9 +1,11 @@
 - name: Create Hetzner infrastructure
+  
   hosts: localhost
   connection: local
   gather_facts: false
 
   tasks:
+
     - name: Create SSH key
       hetzner.hcloud.ssh_key:
         name: elysium-dev

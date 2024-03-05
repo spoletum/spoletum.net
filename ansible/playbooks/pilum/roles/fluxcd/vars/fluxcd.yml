@@ -1,0 +1,3 @@
+fluxcd_version: "2.2.2"
+fluxcd_arch: "amd64"
+fluxcd_os: "linux"

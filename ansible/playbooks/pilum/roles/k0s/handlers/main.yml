@@ -1,0 +1,5 @@
+- name: Wait for k0s to be ready
+  listen: "k0s changed"
+  ansible.builtin.command:
+    cmd: "k0s kubectl wait --for=condition=ready node --all --timeout={{ k0s_ready_wait_timeout }}"
+
