@@ -7,5 +7,5 @@ variable "ssh_public_key" {
 variable "image_id" {
   description = "The ID of the image to use for the server"
   type        = string
-  default     = "152947745"
+  default     = "152947949"
 }
