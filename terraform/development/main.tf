@@ -35,8 +35,9 @@ resource "hcloud_server" "pilum" {
   server_type        = "cax41"
   ssh_keys           = [hcloud_ssh_key.default.id]
   placement_group_id = hcloud_placement_group.default.id
-  user_data          = templatefile("${path.module}/${var.cloud_init_file}", {
-    
+  user_data = templatefile("${path.module}/${var.cloud_init_file}", {
+    hcloud_token = var.hcloud_token
+    github_pat   = var.github_pat
   })
 }
 
