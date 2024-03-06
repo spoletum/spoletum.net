@@ -45,6 +45,6 @@ runcmd:
   - microk8s enable helm3
   - microk8s helm3 repo add argo https://argoproj.github.io/argo-helm
   - microk8s helm3 repo update
-  - microk8s kubectl create namespace argocd
+  - microk8s helm3 install argocd argo/argo-cd -n argocd --create-namespace
   - microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
-  - kubectl apply -f /root/argocd-boot.yml -n argocd
+  - microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
