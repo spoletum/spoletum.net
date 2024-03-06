@@ -34,11 +34,12 @@ resource "hcloud_placement_group" "default" {
 }
 
 resource "hcloud_server" "pilum" {
-  name               = "k0s-controller"
+  name               = "development"
   image              = var.image_id
   server_type        = "cax41"
   ssh_keys           = [hcloud_ssh_key.default.id]
   placement_group_id = hcloud_placement_group.default.id
+  user_data          = file("${path.module}/user_data.yaml").content
 }
 
 resource "hcloud_rdns" "pilum" {

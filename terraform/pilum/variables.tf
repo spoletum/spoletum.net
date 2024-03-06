@@ -9,3 +9,9 @@ variable "image_id" {
   type        = string
   default     = "ubuntu-22.04"
 }
+
+variable "cloud_init_file" {
+  description = "The path to the cloud-init file to use for the server"
+  type        = string
+  default     = "${path.module}/microk8s.yaml"
+}

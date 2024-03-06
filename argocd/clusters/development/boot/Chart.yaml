@@ -1,0 +1,4 @@
+apiVersion: v2
+name: Bootstrap
+description: Application-of-Applications that bootstraps the cluster
+version: 0.0.1

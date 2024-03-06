@@ -1,0 +1,45 @@
+#cloud-init
+
+runcmd:
+  # Install microk8s
+  - apt install -y snapd
+  - snap install microk8s --classic
+  # Enable microk8s addons
+  - microk8s enable helm3 ingress registry
+  # Start microk8s
+  - microk8s start
+  # Bootstrap ArgoCD
+  # - kubectl apply -f /root/argocd-boot.yml -n argocd
+
+write_files:
+  #
+  # This file contains the Hetzner Cloud API token used by the CSI and CNI drivers.
+  #
+  - path: /root/hcloud-secret.yml
+    content: |
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: hcloud
+      type: Opaque
+      data:
+        token: MFR0NjhkM2VEall3bXdIMXZoR2Q2QlI3NHEwZVdmQ0dGYVBCUm1OWHpab2VoaXpZQnhQd0pPSVFER3MxYlFlcwo=   
+    owner: 'root:root'
+    permissions: '600'
+  #
+  # This file contains the ArgoCD bootstrapping configuration.
+  #
+  - path: /root/argocd-boot.yml
+    content: |
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+          name: boot
+      spec:
+          destination:
+              namespace: argocd
+              server: https://kubernetes.default.svc
+          source:
+              repoURL: https://github.com/spoletum/spoletum.net.git
+              targetRevision: HEAD
+              path: argocd/clusters/pilum

@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: boot
+spec:
+    destination:
+        namespace: argocd
+        server: https://kubernetes.default.svc
+    source:
+        repoURL: https://github.com/spoletum/spoletum.net
+        path: argocd/clusters/pilum/boot
+        targetRevision: HEAD
+    project: default
