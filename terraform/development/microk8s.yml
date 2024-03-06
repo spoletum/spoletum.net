@@ -42,4 +42,6 @@ runcmd:
   - snap install microk8s --classic
   - microk8s enable helm3 ingress registry cert-manager metrics-server
   - microk8s start
+  - microk8s status --wait-ready
+  - 
   - kubectl apply -f /root/argocd-boot.yml -n argocd
