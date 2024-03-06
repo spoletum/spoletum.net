@@ -13,5 +13,5 @@ variable "image_id" {
 variable "cloud_init_file" {
   description = "The path to the cloud-init file to use for the server"
   type        = string
-  default     = "${path.module}/microk8s.yaml"
+  default     = "microk8s.yml"
 }
