@@ -39,13 +39,13 @@ write_files:
           path: argocd/clusters/pilum
 
 runcmd:
-  - snap install microk8s --classic
-  - microk8s start
-  - microk8s status --wait-ready
-  - microk8s enable helm3
-  - microk8s helm3 repo add argo https://argoproj.github.io/argo-helm
-  - microk8s helm3 repo update
-  - microk8s helm3 install -n argocd --create-namespace argocd argo/argo-cd
-  - microk8s kubectl create secret docker-registry ghcr-io --docker-server=ghcr.io --docker-username=spoletum --docker-password=${github_pat} -n argocd
-  - microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
-  - microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
+  - install microk8s --classic
+  - /snap/bin/microk8s start
+  - /snap/bin/microk8s status --wait-ready
+  - /snap/bin/microk8s enable helm3
+  - /snap/bin/microk8s helm3 repo add argo https://argoproj.github.io/argo-helm
+  - /snap/bin/microk8s helm3 repo update
+  - /snap/bin/microk8s helm3 install -n argocd --create-namespace argocd argo/argo-cd
+  - /snap/bin/microk8s kubectl create secret docker-registry ghcr-io --docker-server=ghcr.io --docker-username=spoletum --docker-password=${github_pat} -n argocd
+  - /snap/bin/microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
+  - /snap/bin/microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
