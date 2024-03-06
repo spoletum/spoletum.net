@@ -1,0 +1,31 @@
+global:
+  domain: argocd.spoletum.net
+
+configs:
+  params:
+    server.insecure: "true"
+  cm:
+    dex.config: |
+      connectors:
+      - type: oidc
+        id: auth0
+        name: Auth0
+        config:
+          issuer: https://dev-wc2062eb3tma8dfo.us.auth0.com/
+          clientID: 5CqldLKfwtZCtQzQAyIWoKtjlzk0YKlm
+          clientSecret: 461hdf2J3XZKBB0E1sYPFNPD5RYwk6WK__ICzS9Pq7mbiEI-S6u4jaucDUaLLobm
+          redirectURI: https://argocd.spoletum.net/api/dex/callback
+          requestedScopes:
+            - openid
+            - profile
+            - email
+          getuserInfo: true
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: "public"
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    tls: true
