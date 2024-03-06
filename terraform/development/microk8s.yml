@@ -39,7 +39,7 @@ write_files:
           path: argocd/clusters/pilum
 
 runcmd:
-  - install microk8s --classic
+  - snap install microk8s --classic
   - /snap/bin/microk8s start
   - /snap/bin/microk8s status --wait-ready
   - /snap/bin/microk8s enable helm3
