@@ -1,15 +1,9 @@
 #cloud-config
 
-runcmd:
-  # Install microk8s
-  - apt install -y snapd
-  - snap install microk8s --classic
-  # Enable microk8s addons
-  - microk8s enable helm3 ingress registry
-  # Start microk8s
-  - microk8s start
-  # Bootstrap ArgoCD
-  # - kubectl apply -f /root/argocd-boot.yml -n argocd
+package_update: true
+
+packages:
+  - snapd
 
 write_files:
   #
@@ -43,3 +37,9 @@ write_files:
           repoURL: https://github.com/spoletum/spoletum.net.git
           targetRevision: HEAD
           path: argocd/clusters/pilum
+
+runcmd:
+  - snap install microk8s --classic
+  - microk8s enable helm3 ingress registry
+  - microk8s start
+  - kubectl apply -f /root/argocd-boot.yml -n argocd
