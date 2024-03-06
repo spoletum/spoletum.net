@@ -45,5 +45,5 @@ resource "hcloud_server" "pilum" {
 resource "hcloud_rdns" "pilum" {
   server_id  = hcloud_server.pilum.id
   ip_address = hcloud_server.pilum.ipv4_address
-  dns_ptr    = "dev.spoletum.net"
+  dns_ptr    = "spoletum.net"
 }

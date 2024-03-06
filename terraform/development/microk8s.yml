@@ -23,7 +23,7 @@ write_files:
         name: hcloud
       type: Opaque
       data:
-        token: MFR0NjhkM2VEall3bXdIMXZoR2Q2QlI3NHEwZVdmQ0dGYVBCUm1OWHpab2VoaXpZQnhQd0pPSVFER3MxYlFlcwo=   
+        token: MFR0NjhkM2VEall3bXdIMXZoR2Q2QlI3NHEwZVdmQ0dGYVBCUm1OWHpab2VoaXpZQnhQd0pPSVFER3MxYlFlcwo=
     owner: 'root:root'
     permissions: '600'
   #
@@ -34,12 +34,12 @@ write_files:
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-          name: boot
+        name: boot
       spec:
-          destination:
-              namespace: argocd
-              server: https://kubernetes.default.svc
-          source:
-              repoURL: https://github.com/spoletum/spoletum.net.git
-              targetRevision: HEAD
-              path: argocd/clusters/pilum
+        destination:
+          namespace: argocd
+          server: https://kubernetes.default.svc
+        source:
+          repoURL: https://github.com/spoletum/spoletum.net.git
+          targetRevision: HEAD
+          path: argocd/clusters/pilum
