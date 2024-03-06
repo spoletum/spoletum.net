@@ -17,7 +17,7 @@ write_files:
         name: hcloud
       type: Opaque
       data:
-        token: MFR0NjhkM2VEall3bXdIMXZoR2Q2QlI3NHEwZVdmQ0dGYVBCUm1OWHpab2VoaXpZQnhQd0pPSVFER3MxYlFlcwo=
+        token: ${hcloud_token}
     owner: 'root:root'
     permissions: '600'
   #
@@ -45,6 +45,7 @@ runcmd:
   - microk8s enable helm3
   - microk8s helm3 repo add argo https://argoproj.github.io/argo-helm
   - microk8s helm3 repo update
-  - microk8s helm3 install argocd argo/argo-cd -n argocd --create-namespace
+  - microk8s helm3 install -n argocd --create-namespace argocd argo/argo-cd
+  - microk8s kubectl create secret docker-registry ghcr-io --docker-server=ghcr.io --docker-username=spoletum --docker-password=${github_pat} -n argocd
   - microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
   - microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
