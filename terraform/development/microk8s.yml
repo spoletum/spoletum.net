@@ -34,9 +34,9 @@ write_files:
           namespace: argocd
           server: https://kubernetes.default.svc
         source:
-          repoURL: https://github.com/spoletum/spoletum.net.git
+          repoURL: https://github.com/spoletum/spoletum.net
           targetRevision: HEAD
-          path: argocd/clusters/pilum
+          path: argocd/clusters/development
 
   - path: /root/github-spoletum-net.yml
     content: |
@@ -65,4 +65,3 @@ runcmd:
   - /snap/bin/microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
   - /snap/bin/microk8s kubectl apply -f /root/github-spoletum-net.yml -n argocd
   - /snap/bin/microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
-  
