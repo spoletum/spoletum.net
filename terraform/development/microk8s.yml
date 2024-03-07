@@ -30,6 +30,7 @@ write_files:
       metadata:
         name: boot
       spec:
+        project: default
         destination:
           namespace: argocd
           server: https://kubernetes.default.svc
@@ -45,7 +46,7 @@ write_files:
       metadata:
         name: github-spoletum-net
         labels:
-          argocd.argoproj.io/secret-type: repository        
+          argocd.argoproj.io/secret-type: repository
       stringData:
         url: https://github.com/spoletum/spoletum.net
         username: spoletum
