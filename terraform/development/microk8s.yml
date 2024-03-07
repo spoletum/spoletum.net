@@ -38,6 +38,20 @@ write_files:
           targetRevision: HEAD
           path: argocd/clusters/pilum
 
+  - path: /root/spoletum-net-repo.yml
+    content: |
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: spoletum-net
+        labels:
+          argocd.argoproj.io/secret-type: repository        
+      type: Opaque
+      stringData:
+        url: https://github.com/spoletum/spoletum.net
+        username: spoletum
+        password: ${github_pat}
+
 runcmd:
   - snap install microk8s --classic
   - /snap/bin/microk8s start
@@ -49,3 +63,5 @@ runcmd:
   - /snap/bin/microk8s kubectl create secret docker-registry ghcr-io --docker-server=ghcr.io --docker-username=spoletum --docker-password=${github_pat} -n argocd
   - /snap/bin/microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
   - /snap/bin/microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
+  - /snap/bin/microk8s kubectl apply -f /root/spoletum-net-repo.yml -n argocd
+
