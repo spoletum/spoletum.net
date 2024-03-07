@@ -11,3 +11,9 @@ spec:
         path: argocd/clusters/development/hcloud-csi
         targetRevision: HEAD
     project: default
+    syncPolicy:
+        automated:
+        prune: true
+        selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
