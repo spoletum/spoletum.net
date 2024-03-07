@@ -6,4 +6,4 @@ version: 0.0.1
 dependencies:
   - name: hcloud-csi
     version: 2.6.0
-    repository: https://charts.hetzner.com
+    repository: https://charts.hetzner.cloud
