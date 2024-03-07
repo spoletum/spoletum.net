@@ -15,8 +15,7 @@ write_files:
       kind: Secret
       metadata:
         name: hcloud
-      type: Opaque
-      data:
+      stringData:
         token: ${hcloud_token}
     owner: 'root:root'
     permissions: '600'
