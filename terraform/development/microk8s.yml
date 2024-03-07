@@ -63,6 +63,6 @@ runcmd:
   - /snap/bin/microk8s helm3 repo update
   - /snap/bin/microk8s helm3 install -n argocd --create-namespace argocd argo/argo-cd
   - /snap/bin/microk8s kubectl create secret docker-registry ghcr-io --docker-server=ghcr.io --docker-username=spoletum --docker-password=${github_pat} -n argocd
-  - /snap/bin/microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
+  - /snap/bin/microk8s kubectl apply -f /root/hcloud-secret.yml -n kube-system
   - /snap/bin/microk8s kubectl apply -f /root/github-spoletum-net.yml -n argocd
   - /snap/bin/microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
