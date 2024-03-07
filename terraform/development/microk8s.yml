@@ -37,7 +37,7 @@ write_files:
         source:
           repoURL: https://github.com/spoletum/spoletum.net
           targetRevision: HEAD
-          path: argocd/clusters/development
+          path: argocd/clusters/development/boot
 
   - path: /root/github-spoletum-net.yml
     content: |
