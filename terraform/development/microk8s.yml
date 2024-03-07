@@ -65,3 +65,4 @@ runcmd:
   - /snap/bin/microk8s kubectl create secret generic hcloud --from-file=/root/hcloud-secret.yml -n kube-system
   - /snap/bin/microk8s kubectl apply -f /root/github-spoletum-net.yml -n argocd
   - /snap/bin/microk8s kubectl apply -f /root/argocd-boot.yml -n argocd
+  
