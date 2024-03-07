@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-    name: boot
+    name: hcloud-csi
 spec:
     destination:
-        namespace: argocd
+        namespace: kube-system
         server: https://kubernetes.default.svc
     source:
         repoURL: https://github.com/spoletum/spoletum.net
-        path: argocd/clusters/pilum/boot
+        path: argocd/clusters/development/hcloud-csi
         targetRevision: HEAD
     project: default

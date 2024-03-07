@@ -1,6 +1,9 @@
 name: Pilum Terraforming
 
-on: push
+on:
+  push:
+    paths:
+      - 'terraform/development/**'
 
 jobs:
   
