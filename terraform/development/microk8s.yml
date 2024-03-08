@@ -38,11 +38,11 @@ write_files:
           targetRevision: HEAD
           path: argocd/clusters/development/boot
         syncPolicy:
-            automated: true
+          automated:
             prune: true
             selfHeal: true
             syncOptions:
-            - CreateNamespace=true          
+              - CreateNamespace=true          
 
 
   - path: /root/github-spoletum-net.yml
