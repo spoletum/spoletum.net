@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: metrics-server
+spec:
+    destination:
+        namespace: kube-system
+        server: https://kubernetes.default.svc
+    source:
+        repoURL: https://github.com/spoletum/spoletum.net
+        path: metrics-server/clusters/development/metrics-server
+        targetRevision: HEAD
+    project: default
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+        syncOptions:
+            - CreateNamespace=true
+        retry:
+            limit: -1
+            backoff:
+                duration: 5s
+                factor: 2
+                maxDuration: 3m
