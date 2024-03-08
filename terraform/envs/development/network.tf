@@ -4,9 +4,9 @@ resource "hcloud_network" "development" {
 }
 
 resource "hcloud_network_subnet" "internal" {
-  for_each     = toset(var.subnets)
-  ip_range     = each.value.ip_range
-  network_zone = each.zone
+  for_each     = var.subnets
+  ip_range     = each.value.value.ip_range
+  network_zone = each.value.zone
   network_id   = hcloud_network.development.id
-  type         = each.type
+  type         = each.value.type
 }
