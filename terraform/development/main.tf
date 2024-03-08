@@ -47,9 +47,9 @@ resource "hcloud_rdns" "pilum" {
   dns_ptr    = "spoletum.net"
 }
 
-resource "hcloud_managed_certificate" "spoletum.net" {
+resource "hcloud_managed_certificate" "development" {
   name         = "spoletum.net"
-  domain_names = ["spoletum.net", "*.spoletum.net"]
+  domain_names = ["dev.spoletum.net", "*.dev.spoletum.net"]
 }
 
 resource "hcloud_load_balancer" "development" {
