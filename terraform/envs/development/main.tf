@@ -50,16 +50,6 @@ resource "hcloud_managed_certificate" "development" {
   domain_names = ["dev.spoletum.net", "*.dev.spoletum.net"]
 }
 
-resource "hcloud_network" "external" {
-  name     = "external"
-  ip_range = "10.0.0.0/24"
-}
-
-resource "hcloud_network" "internal" {
-  name     = "internal"
-  ip_range = "10.0.1.0/24"
-}
-
 resource "hcloud_load_balancer" "development" {
   name = "development"
   load_balancer_type = "lb11"
