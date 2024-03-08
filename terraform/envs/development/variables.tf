@@ -25,21 +25,3 @@ variable "hcloud_token" {
   description = "The Hetzner Cloud API token to use for the server"
   type        = string
 }
-
-variable "subnets" {
-  description = "The subnets to use for the network"
-  default = [
-    {
-      name     = "internal"
-      zone     = "eu-central"
-      ip_range = "10.0.1.0/24"
-      type     = "public"
-    },
-    {
-      name     = "external"
-      zone     = "eu-central"
-      ip_range = "10.0.0.0/24"
-      type     = "private"
-    }
-  ]
-}

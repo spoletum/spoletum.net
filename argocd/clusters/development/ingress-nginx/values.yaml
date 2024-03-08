@@ -1,5 +1,6 @@
 ingress-nginx:
   controller:
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
     service:
       type: NodePort
-      
