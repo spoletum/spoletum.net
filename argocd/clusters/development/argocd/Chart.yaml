@@ -4,6 +4,6 @@ description: Argo CD is a declarative, GitOps continuous delivery tool for Kuber
 version: 0.0.1
 
 dependencies:
-  - name: argocd
+  - name: argo-cd
     version: 6.6.0
     repository: https://argoproj.github.io/argo-helm
