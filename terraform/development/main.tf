@@ -19,11 +19,6 @@ resource "hcloud_ssh_key" "default" {
   public_key = var.ssh_public_key
 }
 
-resource "hcloud_network" "public" {
-  name     = "public"
-  ip_range = "10.0.0.0/24"
-}
-
 resource "hcloud_placement_group" "default" {
   name = "default"
   type = "spread"
@@ -39,6 +34,9 @@ resource "hcloud_server" "pilum" {
     hcloud_token = var.hcloud_token
     github_pat   = var.github_pat
   })
+  network {
+    network_id = hcloud_network.internal.id
+  }
 }
 
 resource "hcloud_rdns" "pilum" {
@@ -61,7 +59,6 @@ resource "hcloud_network" "internal" {
   name     = "internal"
   ip_range = "10.0.1.0/24"
 }
-
 
 resource "hcloud_load_balancer" "development" {
   name = "development"
