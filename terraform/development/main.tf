@@ -46,3 +46,18 @@ resource "hcloud_rdns" "pilum" {
   ip_address = hcloud_server.pilum.ipv4_address
   dns_ptr    = "spoletum.net"
 }
+
+resource "hcloud_managed_certificate" "spoletum.net" {
+  name         = "spoletum.net"
+  domain_names = ["spoletum.net", "*.spoletum.net"]
+}
+
+resource "hcloud_load_balancer" "development" {
+  name = "development"
+  location = "fsn1"
+  load_balancer_type = "lb11"
+  network_zone = "external"
+  algorithm {
+    type = "round_robin"
+  }
+}
