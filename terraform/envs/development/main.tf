@@ -34,9 +34,6 @@ resource "hcloud_server" "pilum" {
     hcloud_token = var.hcloud_token
     github_pat   = var.github_pat
   })
-  network {
-    network_id = hcloud_network.internal.id
-  }
 }
 
 resource "hcloud_rdns" "pilum" {
