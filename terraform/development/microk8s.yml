@@ -41,8 +41,8 @@ write_files:
           automated:
             prune: true
             selfHeal: true
-            syncOptions:
-              - CreateNamespace=true          
+          syncOptions:
+            - CreateNamespace=true          
 
 
   - path: /root/github-spoletum-net.yml
