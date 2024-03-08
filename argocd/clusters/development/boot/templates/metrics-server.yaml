@@ -8,7 +8,7 @@ spec:
         server: https://kubernetes.default.svc
     source:
         repoURL: https://github.com/spoletum/spoletum.net
-        path: metrics-server/clusters/development/metrics-server
+        path: argocd/clusters/development/metrics-server
         targetRevision: HEAD
     project: default
     syncPolicy:
