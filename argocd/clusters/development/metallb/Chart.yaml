@@ -1,9 +1,0 @@
-apiVersion: v2
-name: hcloud-csi
-description: Hetzner Cloud CSI Driver
-version: 0.0.1
-
-dependencies:
-  - name: metallb
-    version: 0.14.3
-    repository: https://metallb.github.io/metallb
