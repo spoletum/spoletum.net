@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-    name: hcloud-csi
+    name: cert-manager
 spec:
     destination:
-        namespace: kube-system
+        namespace: cert-manager
         server: https://kubernetes.default.svc
     source:
         repoURL: https://github.com/spoletum/spoletum.net
-        path: argocd/clusters/development/hcloud-csi
+        path: argocd/clusters/development/cert-manager
         targetRevision: HEAD
     project: default
     syncPolicy:

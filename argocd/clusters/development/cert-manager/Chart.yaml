@@ -1,0 +1,9 @@
+apiVersion: v2
+name: cert-manager
+description: Helm chart for cert-manager, a Kubernetes add-on to automate the management and issuance of TLS certificates from various issuing sources.
+version: 0.0.1
+
+dependencies:
+  - name: cert-manager
+    version: v1.14.3
+    repository: https://charts.jetstack.io
