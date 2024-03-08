@@ -1,6 +1,6 @@
 argo-cd:
   global:
-    domain: argocd.spoletum.net
+    domain: argocd.dev.spoletum.net
 
   configs:
     params:
@@ -15,7 +15,7 @@ argo-cd:
             issuer: https://dev-wc2062eb3tma8dfo.us.auth0.com/
             clientID: 5CqldLKfwtZCtQzQAyIWoKtjlzk0YKlm
             clientSecret: 461hdf2J3XZKBB0E1sYPFNPD5RYwk6WK__ICzS9Pq7mbiEI-S6u4jaucDUaLLobm
-            redirectURI: https://argocd.spoletum.net/api/dex/callback
+            redirectURI: https://argocd.dev.spoletum.net/api/dex/callback
             requestedScopes:
               - openid
               - profile
