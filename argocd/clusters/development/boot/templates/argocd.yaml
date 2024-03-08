@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-    name: ingress
+    name: argocd
 spec:
     destination:
-        namespace: ingress-nginx
+        namespace: argocd
         server: https://kubernetes.default.svc
     source:
         repoURL: https://github.com/spoletum/spoletum.net
-        path: argocd/clusters/development/ingress-nginx
+        path: argocd/clusters/development/argocd
         targetRevision: HEAD
     project: default
     syncPolicy:
