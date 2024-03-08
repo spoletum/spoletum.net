@@ -42,8 +42,13 @@ write_files:
             prune: true
             selfHeal: true
           syncOptions:
-            - CreateNamespace=true          
-
+            - CreateNamespace=true
+          retry:
+            limit: -1
+            backoff:
+              duration: 5s
+              factor: 2
+              maxDuration: 3m
 
   - path: /root/github-spoletum-net.yml
     content: |
