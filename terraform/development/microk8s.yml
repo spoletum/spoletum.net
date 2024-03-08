@@ -37,6 +37,13 @@ write_files:
           repoURL: https://github.com/spoletum/spoletum.net
           targetRevision: HEAD
           path: argocd/clusters/development/boot
+        syncPolicy:
+            automated: true
+            prune: true
+            selfHeal: true
+            syncOptions:
+            - CreateNamespace=true          
+
 
   - path: /root/github-spoletum-net.yml
     content: |
