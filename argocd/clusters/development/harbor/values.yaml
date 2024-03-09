@@ -1,9 +1,0 @@
-harbor:
-  expose:
-    ingress:
-      className: "ngnix"
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt"
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-  externalURL: https://harbor.dev.spoletum.net
