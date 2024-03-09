@@ -2,7 +2,7 @@ camel-k:
   platform:
     build:
       registry:
-        address: ghcr.io/spoletum
+        address: "ghcr.io/spoletum"
   operator:
-    image: apache/camel-k:2.2.0-arm64
+    image: "apache/camel-k:2.2.0-arm64"
     global: true
