@@ -1,0 +1,9 @@
+apiVersion: v2
+name: camel-k
+description: Camel K is a lightweight integration framework built from Apache Camel that runs natively on Kubernetes and is specifically designed for serverless and microservices architectures.
+version: 0.0.1
+
+dependencies:
+  - name: camel-k
+    version: 2.2.0
+    repository: https://apache.github.io/camel-k/charts/
