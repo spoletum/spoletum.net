@@ -5,4 +5,4 @@ camel-k:
         address: "ghcr.io/spoletum"
   operator:
     image: "docker.io/apache/camel-k:2.2.0-arm64"
-    global: true
+    global: "true"
