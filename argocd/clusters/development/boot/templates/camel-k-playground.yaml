@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: camel-k-playground
+spec:
+    destination:
+        namespace: camel-k-playground
+        server: https://kubernetes.default.svc
+    source:
+        repoURL: https://github.com/spoletum/camel-k-playground
+        path: /
+        targetRevision: HEAD
+    project: default
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+        syncOptions:
+            - CreateNamespace=true
+        retry:
+            limit: -1
+            backoff:
+                duration: 5s
+                factor: 2
+                maxDuration: 3m
