@@ -4,7 +4,7 @@ metadata:
     name: camel-k-playground
 spec:
     destination:
-        namespace: camel-k-playground
+        namespace: camel-k
         server: https://kubernetes.default.svc
     source:
         repoURL: https://github.com/spoletum/camel-k-playground
