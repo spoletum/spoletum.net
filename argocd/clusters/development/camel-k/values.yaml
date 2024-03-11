@@ -4,7 +4,7 @@ camel-k:
       registry:
         address: "ghcr.io/spoletum"
         username: spoletum
-        password: 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
+        secret: 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
   operator:
     image: "docker.io/apache/camel-k:2.2.0-arm64"
     global: "true"
