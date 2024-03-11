@@ -8,7 +8,7 @@ spec:
         server: https://kubernetes.default.svc
     source:
         repoURL: https://github.com/spoletum/camel-k-playground
-        path: /
+        path: ""
         targetRevision: HEAD
     project: default
     syncPolicy:
