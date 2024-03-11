@@ -1,6 +1,7 @@
 camel-k:
   platform:
     build:
+      baseImage: "docker.io/arm64v8/eclipse-temurin:17"
       registry:
         address: "ghcr.io/spoletum"
         organization: spoletum
