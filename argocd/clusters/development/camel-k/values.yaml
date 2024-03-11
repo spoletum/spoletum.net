@@ -4,7 +4,7 @@ camel-k:
       registry:
         address: "ghcr.io/spoletum"
         organization: spoletum
-        secret: ghcr.io
+        secret: ghcr-io
   operator:
     image: "docker.io/apache/camel-k:2.2.0-arm64"
     global: "true"
