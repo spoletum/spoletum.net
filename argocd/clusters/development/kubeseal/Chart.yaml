@@ -1,0 +1,9 @@
+apiVersion: v2
+name: kubeseal
+description: sealed-secrets is a Kubernetes controller and tool for one-way encrypted Secrets
+version: 0.0.1
+
+dependencies:
+  - name: sealed-secrets
+    version: 1.12.1
+    repository: https://charts.bitnami.com/bitnami
