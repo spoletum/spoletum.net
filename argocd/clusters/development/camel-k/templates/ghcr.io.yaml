@@ -1,0 +1,14 @@
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: ghcr.io
+  namespace: camel-k
+spec:
+  encryptedData:
+    .dockerconfigjson: AgCGvC/Jg0fkPH9eWWE3x3k78WUxJ+mjayXmw1tgWmuS/6JVio3EpNYwoJLtwFhtwqMCFpQtwJ+lDy1dvlIjywu2Up8dqFHGLpku0pV7RYftbNo3gPvwSufAzFpEFcVOtd+iSKc7cOLOvcJuDCirv7Gbp3E506UsYRuIf4z2tqol1PzBY2jb/hldjIE1AHYm3WqsU7MazVBJSUUq15skRbQYownVnacX3m46raqRW0w1KOWAvuJbnTBPQnLuZzoFA58RcN0nG30RpuOeEeWjNx6h8TDxatLpr94E52pEKP86jeymJEuiOE0HgXzcy8NHncj1bbRzvTy/UqZMO4yh76NmLvQvgrsWnndy9LUkhyH9o8EefZMoZdnyyBLKsQKz/1zAZAEz6Uy6YRPQaBuIWrfmhQN6USBcrOX9jLseGpcI7NZ0jhyQ4DaXXPsI//13NG764u7lKSUeRViuaWCtjMa+5T61shP6ZGTYByPXvu/ZFfHWN5krrmVmV8E3dzdgyldsqgBgu2NmgxvlfxE+XDE/nGFoZTblAwxqieVs7gVgo5KpegJ+ARkPqR1rgP5f/fo0+6Af2fwgMQnMaubbduJpqaNY1SQrvC2Lpc6Po7mee+hV8I3OqFf/uYCSdwc9DXvrnTN/XCGN4TTrTtZN+g4GEfEXuLF/LyPm7b48EsaKUEKhcqNUfkbH9ghSdiyS6NYzaZZHU16ADhNUbWQ8l8reCRor4pEJMiQEkgndgsVSD8boTRQoL6cpek0AnUddAcWVubIFirgOsCFUaQgbkABrSBRuqoVEGHo7lf6GBHmiXiDFspgHCDc3RjH5blxjtX2jv5CuwOrInV7aJ8hm4xXkcx8ufOc9ga4a3zCFWtpjETyCUymRtoAhddiTlfG+ENLwXdNzPZP5mV0BdY38KE4ISyv6hgbPVuzmbf+PU/H1qQ3rqVD1yEAU0JAal5Sz+ySiCKRC8lh2omCY/Cw8UzOuIQ==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: ghcr.io
+      namespace: camel-k
+    type: kubernetes.io/dockerconfigjson
