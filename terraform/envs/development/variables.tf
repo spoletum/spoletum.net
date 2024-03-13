@@ -25,3 +25,9 @@ variable "hcloud_token" {
   description = "The Hetzner Cloud API token to use for the server"
   type        = string
 }
+
+variable "server_type" {
+  description = "The type of server to create"
+  type        = string
+  default     = "CX51"
+}
