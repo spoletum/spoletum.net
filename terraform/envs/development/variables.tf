@@ -29,5 +29,5 @@ variable "hcloud_token" {
 variable "server_type" {
   description = "The type of server to create"
   type        = string
-  default     = "CX51"
+  default     = "cx51"
 }
