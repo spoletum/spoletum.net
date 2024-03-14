@@ -1,0 +1,9 @@
+apiVersion: v2
+name: kafka
+description: Helm chart for Kafka, a distributed streaming platform.
+version: 0.0.1
+
+dependencies:
+  - name: kafka
+    version: 27.1.2
+    repository: ttps://charts.bitnami.com/bitnami
