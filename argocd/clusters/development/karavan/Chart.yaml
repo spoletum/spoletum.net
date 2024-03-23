@@ -6,4 +6,4 @@ version: 0.0.1
 dependencies:
   - name: karavan
     version: 0.0.1
-    repository: file://../../charts/karavan
+    repository: file://../../../charts/camel-karavan
