@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: karavan
+spec:
+    destination:
+        namespace: karavan
+        server: https://kubernetes.default.svc
+    source:
+        repoURL: https://github.com/spoletum/spoletum.net
+        path: argocd/clusters/development/karavan
+        targetRevision: HEAD
+    project: default
+    syncPolicy:
+        automated:
+            prune: true
+            selfHeal: true
+        syncOptions:
+            - CreateNamespace=true
+        retry:
+            limit: -1
+            backoff:
+                duration: 5s
+                factor: 2
+                maxDuration: 3m
