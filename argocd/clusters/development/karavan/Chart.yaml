@@ -4,6 +4,6 @@ description: Karavan is a web-based tool for building Apache Camel integrations.
 version: 0.0.1
 
 dependencies:
-  - name: karavan
+  - name: camel-karavan
     version: 0.0.1
-    repository: file://../../../charts
+    repository: file://../../../charts/camel-karavan
