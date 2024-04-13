@@ -1,0 +1,44 @@
+name: Pilum Terraforming
+
+on:
+  push:
+    paths:
+      - 'ansible/playbooks/main.yml'
+      - 'ansible/inventories/nonprod.yml'
+      - 'ansible/roles/**'
+
+jobs:
+  
+  ansible:
+
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      ANSIBLE_HOST_KEY_CHECKING: False
+      ANSIBLE_SSH_RETRIES: 3
+      ANSIBLE_SSH_TIMEOUT: 30
+      ANSIBLE_SSH_PIPELINING: True
+      ANSIBLE_SSH_ARGS: -o ControlMaster=auto -o ControlPersist=60s
+      ANSIBLE_REMOTE_USER: ansibot
+      ANSIBLE_PRIVATE_KEY_FILE: ${{ secrets.ANSIBLE_PRIVATE_KEY_FILE }}
+    defaults:
+      run:
+        working-directory: ansible
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Ansible Playbook
+        run: ansible-playbook main.yml

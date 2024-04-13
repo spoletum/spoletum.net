@@ -3,7 +3,8 @@ name: Pilum Terraforming
 on:
   push:
     paths:
-      - 'terraform/envs/development/**'
+      - 'terraform/envs/nonprod/**'
+      - 'terraform/modules/**'
 
 jobs:
   

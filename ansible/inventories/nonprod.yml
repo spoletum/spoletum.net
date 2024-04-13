@@ -2,5 +2,5 @@ all:
   children:
     kubernetes:
       hosts:
-        development:
+        kubernetes:
           ansible_host: dev.spoletum.net

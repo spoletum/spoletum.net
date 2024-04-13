@@ -1,5 +1,5 @@
 - name: Microk8s playbook
-  hosts: microk8s
+  hosts: development
   become: true
   roles:
     - microk8s
