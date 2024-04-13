@@ -7,19 +7,9 @@ packer {
   }
 }
 
-variable "k0s_version" {
-  type    = string
-  default = "v1.29.2+k0s.0"
-}
-
-variable "k0s_arch" {
-  type    = string
-  default = "arm64"
-}
-
 variable "vm_type" {
   type    = string
-  default = "cax11"
+  default = "cx11"
 }
 
 source "hcloud" "microk8s_arm64" {

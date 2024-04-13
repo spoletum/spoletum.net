@@ -13,17 +13,7 @@ variable "image_id" {
 variable "cloud_init_file" {
   description = "The path to the cloud-init file to use for the server"
   type        = string
-  default     = "microk8s.yml"
-}
-
-variable "github_pat" {
-  description = "The GitHub personal access token to use for the server"
-  type        = string
-}
-
-variable "hcloud_token" {
-  description = "The Hetzner Cloud API token to use for the server"
-  type        = string
+  default     = "cloud-config.yml"
 }
 
 variable "server_type" {

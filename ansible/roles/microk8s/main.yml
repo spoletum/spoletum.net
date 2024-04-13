@@ -1,0 +1,19 @@
+- name: Ensure snapd is installed
+  ansible.builtin.systemd_service:
+    name: snapd
+    state: started
+    enabled: yes
+
+- name: Update microk8s
+  community.general.snap:
+    name: microk8s
+    classic: yes
+
+- name: Check MicroK8s status
+  ansible.builtin.shell: "microk8s.status --wait-ready --timeout=30"
+  register: microk8s_status
+  ignore_errors: yes
+
+- name: Start MicroK8s if not running
+  ansible.builtin.shell: "microk8s.start"
+  when: microk8s_status.rc != 0

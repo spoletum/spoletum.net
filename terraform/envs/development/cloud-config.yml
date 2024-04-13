@@ -1,0 +1,20 @@
+#cloud-config
+
+# Disable password-based SSH authentication
+ssh_pwauth: false
+
+# Disable root login
+disable_root: true
+
+# Adds the fail2ban package
+packages:
+  - fail2ban
+
+# Create a sudo-able user for Ansible
+users:
+  - name: ansibot
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${ssh_public_key}
