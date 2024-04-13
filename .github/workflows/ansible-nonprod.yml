@@ -28,12 +28,12 @@ jobs:
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.12'
 
       - name: Install Ansible
         run: |
@@ -41,4 +41,4 @@ jobs:
           pip install ansible
 
       - name: Ansible Playbook
-        run: ansible-playbook main.yml
+        run: ansible-playbook -i inventories/nonprod.yml playbooks/main.yml
