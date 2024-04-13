@@ -1,5 +1,5 @@
-- name: Microk8s playbook
-  hosts: development
+- name: Pilum Playbook
+  hosts: kubernetes
   become: true
   roles:
     - microk8s
