@@ -6,10 +6,6 @@ ssh_pwauth: false
 # Disable root login
 disable_root: true
 
-# Adds the fail2ban package
-packages:
-  - fail2ban
-
 # Create a sudo-able user for Ansible
 users:
   - name: ansibot
