@@ -1,0 +1,24 @@
+- name: "Check if th k0s service already exists"
+  stat:
+    path: "/etc/systemd/system/k0scontroller.service"
+  register: k0s_service
+
+- name: "Ensure that the k0s service exists"
+  when: k0s_service.stat.exists == False
+  block:
+    - name: "Download k0s"
+      get_url:
+        url: "https://github.com/k0sproject/k0s/releases/download/v1.29.3%2Bk0s.0/k0s-v1.29.3+k0s.0-amd64"
+        dest: "/usr/local/bin/k0s"
+        mode: "0755"
+        owner: "root"
+        group: "root"
+        checksum: "sha256:1320c4ac2ff15fc9442c8629739a55bf21e8951b5b244c791aa9c9990280ecce"
+    - name: "Create k0s service"
+      command: "k0s install controller --single"
+      
+- name: "Ensure that the k0s service is running"
+  systemd:
+    name: "k0scontroller"
+    state: "started"
+    enabled: true
