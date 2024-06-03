@@ -2,4 +2,4 @@
   hosts: kubernetes
   become: true
   roles:
-    - k0s
+    - microk8s

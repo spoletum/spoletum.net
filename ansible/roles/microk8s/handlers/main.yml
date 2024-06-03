@@ -1,0 +1,7 @@
+- name: wait_for_microk8s
+  command: microk8s status --wait-ready
+  register: microk8s_status_final
+  until: "'microk8s is running' in microk8s_status_final.stdout"
+  changed_when: false
+  # retries: 5
+  # delay: 10
