@@ -1,5 +1,22 @@
-- name: Non-Production Playbook
+- name: Create VM fleet
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - vars/hetzner.yml
+  roles:
+    - hetzner
+
+- name: Deploy Kubernetes
   hosts: kubernetes
   become: true
   roles:
     - microk8s
+
+- name: Deploy Camel-K
+  hosts: kubernetes
+  become: true
+  roles:
+    - camel-k
+
+    

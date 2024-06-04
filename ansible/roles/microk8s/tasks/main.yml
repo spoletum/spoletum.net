@@ -25,3 +25,29 @@
   command: microk8s start
   when: "'microk8s is not running' in microk8s_status.stdout"
   notify: wait_for_microk8s
+
+- name: Deploy Hetzner's CSI driver using Helm
+  kubernetes.core.helm:
+    binary_path: "{{ helm_binary_path }}"
+    name: "csi-driver"
+    chart_repo_url: "https://charts.hetzner.cloud"
+    chart_ref: "hcloud-csi"
+    chart_version: "2.6.0"
+    release_namespace: "kube-system"
+    state: present
+    wait: yes
+    values:
+      controller:
+        hcloudToken:
+          value: "{{ hcloud_api_token }}"
+
+- name: Deploy metrics-server using Helm
+  kubernetes.core.helm:
+    binary_path: "{{ helm_binary_path }}"
+    name: "metrics-server"
+    chart_repo_url: "https://kubernetes-sigs.github.io/metrics-server"
+    chart_ref: "metrics-server"
+    chart_version: "3.12.1"
+    release_namespace: "kube-system"
+    state: present
+    wait: yes

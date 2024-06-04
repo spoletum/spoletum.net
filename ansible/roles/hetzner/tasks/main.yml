@@ -1,0 +1,28 @@
+- name: Create Hetzner Cloud Server
+  hetzner.hcloud.hcloud_server:
+    name: "development"
+    server_type: "cpx41"
+    image: "ubuntu-24.04"
+    ssh_keys: "alessandro@DESKTOP-CQI0QDA"
+    state: present
+    api_token: "{{ hcloud_api_token }}"
+  register: hcloud_server
+
+- name: Apply RDNS to Hetzner Cloud Server
+  hetzner.hcloud.rdns:
+    server: "{{ hcloud_server.hcloud_server.id }}"
+    ip_address: "{{ hcloud_server.hcloud_server.ipv4_address }}"
+    dns_ptr: "dev.spoletum.net"
+    api_token: "{{ hcloud_api_token }}"
+  register: hcloud_server_rdns
+
+- name: Register the VM to Hetzner DNS
+  community.dns.hetzner_dns_record:
+    zone: "spoletum.net"
+    type: "A"
+    prefix: "dev"
+    state: present
+    ttl: 3600
+    value: "{{ hcloud_server.hcloud_server.ipv4_address }}"
+    api_token: "{{ hcloud_dns_api_token }}"
+  register: hcloud_dns_record

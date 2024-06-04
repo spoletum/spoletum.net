@@ -1,0 +1,20 @@
+- name: Deploy the Camel Operator using Helm
+  kubernetes.core.helm:
+    binary_path: "{{ helm_binary_path }}"
+    name: "camel-k"
+    chart_repo_url: "https://apache.github.io/camel-k/charts"
+    chart_ref: "camel-k"
+    chart_version: "2.3.2"
+    release_namespace: "camel-k"
+    create_namespace: yes
+    state: present
+    wait: yes
+    values:
+      platform:
+        build:
+          registry:
+            address: "ghcr.io/spoletum"
+            organization: spoletum
+            secret: ghcr-io
+      operator:
+        global: "true"
